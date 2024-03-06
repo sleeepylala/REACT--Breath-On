@@ -3,7 +3,7 @@ import { FaArrowRight } from "react-icons/fa6";
 
 const Home = () => {
   return (
-    <section className="">
+    <section className="py-16">
       <div className="grid grid-cols-1 sm:grid-cols-12 border-2 border-blue-900 ">
         <div className="col-span-6 flex flex-col justify-center items-center ">
           <h1 className="text-colorText text-center font-petit-formal-script text-3xl md:text-4xl lg:text-6xl">
