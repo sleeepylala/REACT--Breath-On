@@ -3,16 +3,21 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <Router>
-      <div className="flex min-h-screen flex-col">
+      <main className=" min-h-screen flex-col">
         <Navbar />
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-        </Routes>
-      </div>
+        <div className="content-wrapper">
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+          </Routes>
+        </div>
+
+        <Footer />
+      </main>
     </Router>
   );
 }

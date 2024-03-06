@@ -9,12 +9,12 @@ const Navbar = () => {
     setIsDark(!isDark);
   };
   return (
-    <nav className="fixed flex border-gray-500 border-opacity-50 border-2 top-0 left-0 right-0 bg-[#FFD6CB]">
+    <nav className="flex border-gray-500 border-opacity-50 border-2 top-0 left-0 right-0 bg-[#FFD6CB]">
       <div className="flex container m-auto border-2 border-black justify-between items-center py-7 px-5">
         <Link to="/">
           <img src="./assets/images/logo.svg" alt="Logo" />
         </Link>
-        <button onClick={toggleDarkTheme}>
+        <button className="cursor-pointer" onClick={toggleDarkTheme}>
           <TbMoonFilled className="h-8 w-8 text-primary" />
         </button>
       </div>
