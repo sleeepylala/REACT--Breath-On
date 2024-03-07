@@ -3,6 +3,7 @@ import ButtonTemplate from "./ButtonTemplate";
 import Timer from "./Timer";
 import ButtonSounds from "./ButtonSounds";
 import ButtonMinutes from "./ButtonMinutes";
+import ButtonTimer from "./ButtonTimer";
 
 const TimerSection = () => {
   const buttonTemplateData1 = [
@@ -36,7 +37,10 @@ const TimerSection = () => {
       <div className="container-timer border-2  border-orange-700 flex justify-center">
         <Timer />
       </div>
-      <div className="grid md:flex md:flex-row  md:justify-center md:space-x-10">
+      <div className="container-timer border-2  border-orange-700 flex justify-center">
+        <ButtonTimer />
+      </div>
+      <div className="grid md:flex md:flex-row  md:justify-center md:space-x-10 my-24">
         <ButtonMinutes />
       </div>
 
