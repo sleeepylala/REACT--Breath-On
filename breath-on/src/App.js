@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
 import TextSection from "./components/TextSection";
+import TimerSection from "./components/TimerSection";
 
 function App() {
   return (
@@ -15,8 +16,9 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home />} />
           </Routes>
+          <TextSection />
+          <TimerSection />
         </div>
-        <TextSection />
 
         <Footer />
       </main>
