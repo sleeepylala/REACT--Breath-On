@@ -26,7 +26,7 @@ const TimerSection = () => {
 
   return (
     <section className="border-2 border-red-900 flex flex-col mt-24">
-      <div className="flex border-2 border-blue-900 justify-center items-center space-x-20 ">
+      <div className="flex border-2 border-blue-900 justify-center items-center sm:space-x-10 space-x-20 xl:space-x-60">
         {buttonTemplateData1.map((item, index) => {
           return (
             <ButtonTemplate
@@ -37,7 +37,7 @@ const TimerSection = () => {
           );
         })}
       </div>
-      <div className="flex justify-around ">
+      <div className="flex justify-around xl:space-x-40 sm:space-x-16">
         {buttonTemplateData2.map((item, index) => {
           return <ButtonTemplate key={index} img={item.img} />;
         })}
@@ -45,7 +45,7 @@ const TimerSection = () => {
       <div className="container-timer border-2  border-orange-700 flex justify-center">
         <Timer />
       </div>
-      <div className="container-sounds border-3 border-black justify-center items-center inline-flex space-x-16">
+      <div className="container-sounds border-3 border-black  items-center inline-flex  justify-around">
         {buttonSounds.map((item, index) => (
           <ButtonSounds key={index} img={item.img} title={item.title} />
         ))}
