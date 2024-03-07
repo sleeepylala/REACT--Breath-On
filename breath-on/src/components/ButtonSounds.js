@@ -12,13 +12,18 @@ const ButtonSounds = () => {
   ];
 
   return (
-    <div className="flex flex-row justify-around items-center py-7">
+    <div className="container-sounds border-3 border-black items-center justify-around sm:grid sm:grid-cols-3 md:grid-cols-4 lg:flex lg:flex-row">
       {buttonSounds.map((item, index) => (
-        <div key={index} className="flex flex-col items-center justify-around">
-          <button className="border rounded-full bg-white flex items-center justify-center sm:w-16 sm:h-16 xl:h-20 xl:w-20 mb-2">
+        <div
+          key={index}
+          className="flex flex-col items-center justify-around m-2"
+        >
+          <button className="border rounded-full bg-white flex items-center justify-center w-24 h-24 ">
             <img src={item.img} alt="iconsounds-button" />
           </button>
-          <p className="text-textColor font-petrona xl:text-xl">{item.title}</p>
+          <p className="text-textColor font-petrona xl:text-xl mt-2">
+            {item.title}
+          </p>
         </div>
       ))}
     </div>

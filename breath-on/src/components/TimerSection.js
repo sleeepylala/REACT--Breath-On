@@ -2,6 +2,7 @@ import React from "react";
 import ButtonTemplate from "./ButtonTemplate";
 import Timer from "./Timer";
 import ButtonSounds from "./ButtonSounds";
+import ButtonMinutes from "./ButtonMinutes";
 
 const TimerSection = () => {
   const buttonTemplateData1 = [
@@ -15,7 +16,7 @@ const TimerSection = () => {
   ];
 
   return (
-    <section className="border-2 border-red-900 flex flex-col mt-24">
+    <section className="section-timer border-2 border-red-900 flex flex-col mt-24 ">
       <div className="flex border-2 border-blue-900 justify-center items-center sm:space-x-10 space-x-20 xl:space-x-60">
         {buttonTemplateData1.map((item, index) => {
           return (
@@ -35,9 +36,11 @@ const TimerSection = () => {
       <div className="container-timer border-2  border-orange-700 flex justify-center">
         <Timer />
       </div>
-      <div className="container-sounds border-3 border-black  items-center  justify-around">
-        <ButtonSounds />
+      <div className="grid md:flex md:flex-row  md:justify-center md:space-x-10">
+        <ButtonMinutes />
       </div>
+
+      <ButtonSounds />
     </section>
   );
 };
