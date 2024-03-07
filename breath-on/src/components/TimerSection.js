@@ -14,16 +14,6 @@ const TimerSection = () => {
     { img: "../assets/images/read.svg" },
   ];
 
-  const buttonSounds = [
-    { img: "../assets/images/fire.svg", title: "fire" },
-    { img: "../assets/images/waves.svg", title: "waves" },
-    { img: "../assets/images/water.svg", title: "water" },
-    { img: "../assets/images/piano.svg", title: "piano" },
-    { img: "../assets/images/wind.svg", title: "wind" },
-    { img: "../assets/images/bird.svg", title: "chirping" },
-    { img: "../assets/images/jungle.svg", title: "jungle" },
-  ];
-
   return (
     <section className="border-2 border-red-900 flex flex-col mt-24">
       <div className="flex border-2 border-blue-900 justify-center items-center sm:space-x-10 space-x-20 xl:space-x-60">
@@ -45,10 +35,8 @@ const TimerSection = () => {
       <div className="container-timer border-2  border-orange-700 flex justify-center">
         <Timer />
       </div>
-      <div className="container-sounds border-3 border-black  items-center inline-flex  justify-around">
-        {buttonSounds.map((item, index) => (
-          <ButtonSounds key={index} img={item.img} title={item.title} />
-        ))}
+      <div className="container-sounds border-3 border-black  items-center  justify-around">
+        <ButtonSounds />
       </div>
     </section>
   );
