@@ -1,5 +1,5 @@
 // TimerSection.jsx
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import ButtonTemplate from "./ButtonTemplate";
 import Timer from "./Timer";
 import ButtonSounds from "./ButtonSounds";
@@ -18,27 +18,25 @@ const TimerSection = () => {
 
   // Stato per il pulsante di play/pausa
   const [isPlay, setIsPlay] = useState(false);
-
-  // Funzione per cambiare lo stato di play/pausa
-  const togglePlay = () => {
-    setIsPlay(!isPlay);
-  };
+  const [secondsValue, setSecondsValue] = useState(0);
+  const intervalIdRef = useRef(null);
 
   // Gestore del clic del pulsante play/pausa
   const handleButtonClick = () => {
-    if (isPlay) {
-      setIsPlay(false);
-      // Aggiungi qui la logica per il pulsante Pause se necessario
+    setIsPlay(!isPlay);
+    if (!isPlay) {
+      intervalIdRef.current = setInterval(() => {
+        setSecondsValue((prev) => prev + 1);
+      }, 1000);
     } else {
-      setIsPlay(true);
-      // Aggiungi qui la logica per il pulsante Play se necessario
+      clearInterval(intervalIdRef.current);
     }
   };
-
-  // Gestore del clic del pulsante di restart
+  // Gestore del clic del pulsante restart
   const handleRestartClick = () => {
     setIsPlay(false);
-    // Aggiungi qui la logica per il pulsante Restart se necessario
+    setSecondsValue(0);
+    clearInterval(intervalIdRef.current);
   };
 
   return (
@@ -54,7 +52,7 @@ const TimerSection = () => {
         ))}
       </div>
       <div className="container-timer border-2  border-orange-700 flex justify-center">
-        <Timer />
+        <Timer secondsValue={secondsValue} />
       </div>
       <div className="container-timer border-2  border-orange-700 flex justify-center">
         <ButtonTimer

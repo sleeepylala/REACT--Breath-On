@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-const Timer = () => {
+const Timer = (props) => {
   return (
     <section>
       <div>
         <CircularProgressbar
-          value={60}
-          text={`60%`}
+          value={props.secondsValue}
+          text={`${props.secondsValue}`}
           styles={buildStyles({
             // Rotation of path and trail, in number of turns (0-1)
             rotation: 0.25,
@@ -29,7 +29,6 @@ const Timer = () => {
             backgroundColor: "#5EA9BE",
           })}
         />
-        ;
       </div>
     </section>
   );
