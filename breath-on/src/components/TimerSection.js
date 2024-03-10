@@ -19,8 +19,8 @@ const TimerSection = () => {
   // Stato per il pulsante di play/pausa
   const [isPlay, setIsPlay] = useState(false);
   const [time, setTime] = useState({
-    minutes: 0,
-    seconds: 0,
+    minutes: "0" + 0,
+    seconds: "0" + 0,
   });
 
   // Gestore dell'incrementare e fermare timer
@@ -29,19 +29,26 @@ const TimerSection = () => {
     if (isPlay) {
       interval = setInterval(() => {
         setTime((prevTime) => {
+          if (prevTime.minutes == 0 && prevTime.seconds <= 0) {
+            setIsPlay(false);
+            return {
+              minutes: "0" + 0,
+              seconds: "0" + 0,
+            };
+          }
           if (prevTime.seconds <= 0) {
             return { ...prevTime, seconds: 59 };
           } else {
             return {
               minutes:
                 prevTime.seconds === 59
-                  ? prevTime.minutes - 1
+                  ? "0" + (prevTime.minutes - 1)
                   : prevTime.minutes,
               seconds: prevTime.seconds - 1,
             };
           }
         });
-      }, 1000);
+      }, 20);
     }
     return () => {
       if (interval) {
@@ -53,19 +60,19 @@ const TimerSection = () => {
   const addFiveMin = () => {
     setTime({
       minutes: 5,
-      seconds: 0,
+      seconds: "0" + 0,
     });
   };
   const addTenMin = () => {
     setTime({
       minutes: 10,
-      seconds: 0,
+      seconds: "0" + 0,
     });
   };
   const addFifteenMin = () => {
     setTime({
       minutes: 15,
-      seconds: 0,
+      seconds: "0" + 0,
     });
   };
 
@@ -77,8 +84,8 @@ const TimerSection = () => {
   const handleRestartClick = () => {
     setIsPlay(false);
     setTime({
-      minutes: 0,
-      seconds: 0,
+      minutes: "0" + 0,
+      seconds: "0" + 0,
     });
   };
 
