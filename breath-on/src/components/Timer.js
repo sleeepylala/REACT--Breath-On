@@ -8,7 +8,7 @@ const Timer = (props) => {
       <div>
         <CircularProgressbar
           value={props.secondsValue}
-          text={`${props.secondsValue}`}
+          text={`${props.minutesValue} : ${props.secondsValue}`}
           styles={buildStyles({
             // Rotation of path and trail, in number of turns (0-1)
             rotation: 0.25,

@@ -1,5 +1,5 @@
 // TimerSection.jsx
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ButtonTemplate from "./ButtonTemplate";
 import Timer from "./Timer";
 import ButtonSounds from "./ButtonSounds";
@@ -18,26 +18,41 @@ const TimerSection = () => {
 
   // Stato per il pulsante di play/pausa
   const [isPlay, setIsPlay] = useState(false);
-  const [secondsValue, setSecondsValue] = useState(0);
-  const intervalIdRef = useRef(null);
+  const [time, setTime] = useState({
+    minutes: 0,
+    seconds: 0,
+  });
 
-  // Gestore del clic del pulsante play/pausa
+  useEffect(() => {
+    let interval;
+    if (isPlay) {
+      interval = setInterval(() => {
+        setTime((prevTime) => {
+          if (prevTime.seconds === 59) {
+            return { minutes: prevTime.minutes + 1, seconds: 0 };
+          } else {
+            return { ...prevTime, seconds: prevTime.seconds + 1 };
+          }
+        });
+      }, 100);
+    }
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [isPlay]);
+
   const handleButtonClick = () => {
     setIsPlay(!isPlay);
-    if (!isPlay) {
-      intervalIdRef.current = setInterval(() => {
-        setSecondsValue((prev) => prev + 1);
-      }, 1000);
-    } else {
-      clearInterval(intervalIdRef.current);
-    }
   };
   // Gestore del clic del pulsante restart
-  const handleRestartClick = () => {
-    setIsPlay(false);
-    setSecondsValue(0);
-    clearInterval(intervalIdRef.current);
-  };
+  // const handleRestartClick = () => {
+  //   setIsPlay(false);
+  //   setSecondsValue(0);
+  //   setMinutesValue(0);
+  //   clearInterval(intervalIdRef.current);
+  // };
 
   return (
     <section className="section-timer border-2 border-red-900 flex flex-col mt-24 ">
@@ -52,14 +67,14 @@ const TimerSection = () => {
         ))}
       </div>
       <div className="container-timer border-2  border-orange-700 flex justify-center">
-        <Timer secondsValue={secondsValue} />
+        <Timer secondsValue={time.seconds} minutesValue={time.minutes} />
       </div>
       <div className="container-timer border-2  border-orange-700 flex justify-center">
         <ButtonTimer
           img={isPlay ? "pause" : "play"}
           onChange={handleButtonClick}
         />
-        <ButtonTimer img="restart" onChange={handleRestartClick} />
+        <ButtonTimer img="restart" />
       </div>
       <div className="grid md:flex md:flex-row  md:justify-center md:space-x-10 my-24">
         <ButtonMinutes />
