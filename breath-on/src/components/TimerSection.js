@@ -23,6 +23,7 @@ const TimerSection = () => {
     seconds: 0,
   });
 
+  // Gestore dell'incrementare e fermare timer
   useEffect(() => {
     let interval;
     if (isPlay) {
@@ -46,13 +47,15 @@ const TimerSection = () => {
   const handleButtonClick = () => {
     setIsPlay(!isPlay);
   };
+
   // Gestore del clic del pulsante restart
-  // const handleRestartClick = () => {
-  //   setIsPlay(false);
-  //   setSecondsValue(0);
-  //   setMinutesValue(0);
-  //   clearInterval(intervalIdRef.current);
-  // };
+  const handleRestartClick = () => {
+    setIsPlay(false);
+    setTime({
+      minutes: 0,
+      seconds: 0,
+    });
+  };
 
   return (
     <section className="section-timer border-2 border-red-900 flex flex-col mt-24 ">
@@ -74,7 +77,7 @@ const TimerSection = () => {
           img={isPlay ? "pause" : "play"}
           onChange={handleButtonClick}
         />
-        <ButtonTimer img="restart" />
+        <ButtonTimer img="restart" onChange={handleRestartClick} />
       </div>
       <div className="grid md:flex md:flex-row  md:justify-center md:space-x-10 my-24">
         <ButtonMinutes />
