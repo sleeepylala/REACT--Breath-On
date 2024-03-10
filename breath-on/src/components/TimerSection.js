@@ -1,5 +1,5 @@
 // TimerSection.jsx
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ButtonTemplate from "./ButtonTemplate";
 import Timer from "./Timer";
 import ButtonSounds from "./ButtonSounds";
@@ -29,13 +29,19 @@ const TimerSection = () => {
     if (isPlay) {
       interval = setInterval(() => {
         setTime((prevTime) => {
-          if (prevTime.seconds === 59) {
-            return { minutes: prevTime.minutes + 1, seconds: 0 };
+          if (prevTime.seconds <= 0) {
+            return { ...prevTime, seconds: 59 };
           } else {
-            return { ...prevTime, seconds: prevTime.seconds + 1 };
+            return {
+              minutes:
+                prevTime.seconds === 59
+                  ? prevTime.minutes - 1
+                  : prevTime.minutes,
+              seconds: prevTime.seconds - 1,
+            };
           }
         });
-      }, 100);
+      }, 1000);
     }
     return () => {
       if (interval) {
@@ -43,6 +49,25 @@ const TimerSection = () => {
       }
     };
   }, [isPlay]);
+
+  const addFiveMin = () => {
+    setTime({
+      minutes: 5,
+      seconds: 0,
+    });
+  };
+  const addTenMin = () => {
+    setTime({
+      minutes: 10,
+      seconds: 0,
+    });
+  };
+  const addFifteenMin = () => {
+    setTime({
+      minutes: 15,
+      seconds: 0,
+    });
+  };
 
   const handleButtonClick = () => {
     setIsPlay(!isPlay);
@@ -80,7 +105,7 @@ const TimerSection = () => {
         <ButtonTimer img="restart" onChange={handleRestartClick} />
       </div>
       <div className="grid md:flex md:flex-row  md:justify-center md:space-x-10 my-24">
-        <ButtonMinutes />
+        <ButtonMinutes onClick={addFiveMin} />
       </div>
       <ButtonSounds />
     </section>
