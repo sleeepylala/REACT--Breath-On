@@ -18,6 +18,15 @@ const Timer = (props) => {
     setPercentage(newPercentage);
   }, [props.minutesValue, props.secondsValue, props.initialTotalSeconds]);
 
+  // Effetto per gestire il reset del timer
+  useEffect(() => {
+    if (props.resetTimer) {
+      setPercentage(0);
+      // Reimposta lo stato resetTimer a false dopo aver gestito il reset
+      props.onResetTimerComplete();
+    }
+  }, [props.resetTimer, props.onResetTimerComplete]);
+
   // Funzione per formattare il numero aggiungendo uno zero se necessario
   const formatNumber = (number) => {
     return number < 10 ? `0${number}` : number;
@@ -39,7 +48,7 @@ const Timer = (props) => {
             strokeLinecap: "round",
             textSize: "16px",
             pathTransitionDuration: 0.5,
-            pathColor: `rgba(62, 152, 199)`,
+            pathColor: "#5EA9BE",
             textColor: "#222222",
             trailColor: "#d6d6d6",
             backgroundColor: "#5EA9BE",

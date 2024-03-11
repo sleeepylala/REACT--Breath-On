@@ -23,7 +23,8 @@ const TimerSection = () => {
   });
   const [initialTotalSeconds, setInitialTotalSeconds] = useState(0);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
-  const [isFinished, setIsFinished] = useState(false); //  stato per indicare se il timer è terminato
+  const [isFinished, setIsFinished] = useState(false);
+  const [resetTimer, setResetTimer] = useState(false);
 
   // Effetto per il conteggio del tempo
   useEffect(() => {
@@ -56,6 +57,10 @@ const TimerSection = () => {
 
   // Funzione per gestire il clic del pulsante di riproduzione/pausa
   const handleButtonClick = () => {
+    // Se il timer è già in esecuzione o non è stato impostato alcun intervallo, non fare nulla
+    if (!isPlay && time.minutes === 0 && time.seconds === 0) {
+      return;
+    }
     setIsPlay(!isPlay);
   };
 
@@ -63,6 +68,7 @@ const TimerSection = () => {
   const handleRestartClick = () => {
     setIsPlay(false);
     setTime({ minutes: 0, seconds: 0 });
+    setResetTimer(true);
   };
 
   const addFiveMin = () => setTime({ minutes: 5, seconds: 0 });
@@ -91,6 +97,8 @@ const TimerSection = () => {
           minutesValue={minutesValue}
           initialTotalSeconds={initialTotalSeconds}
           isFinished={isFinished}
+          resetTimer={resetTimer}
+          onResetTimerComplete={() => setResetTimer(false)} // Funzione di callback per reimpostare resetTimer a false
         />
       </div>
       <div className="container-timer border-2  border-orange-700 flex justify-center">
