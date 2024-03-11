@@ -21,3 +21,6 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+.progress-bar .CircularProgressbar-path {
+  stroke-width: 3px; /* Imposta lo spessore desiderato */
+}

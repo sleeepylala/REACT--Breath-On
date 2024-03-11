@@ -101,7 +101,7 @@ const TimerSection = () => {
           onResetTimerComplete={() => setResetTimer(false)} // Funzione di callback per reimpostare resetTimer a false
         />
       </div>
-      <div className="container-timer border-2  border-orange-700 flex justify-center">
+      <div className="container-timer border-2  border-orange-700 flex justify-center space-x-24">
         <ButtonTimer
           img={isPlay ? "pause" : "play"}
           onChange={handleButtonClick}

@@ -29,7 +29,7 @@ const ButtonTimer = ({ img, onChange }) => {
 
   return (
     <button
-      className="border rounded-full bg-primary flex items-center justify-center w-14 h-14"
+      className="border rounded-full bg-primary flex items-center justify-center w-14 h-14 "
       onClick={onChange}
     >
       {imageSrc && <img src={imageSrc} alt={altText} />}

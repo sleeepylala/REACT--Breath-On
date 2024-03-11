@@ -3,7 +3,7 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 const Timer = (props) => {
-  const [percentage, setPercentage] = useState(0);
+  const [percentage, setPercentage] = useState(100); // Inizia con la barra piena
 
   // Effetto per calcolare e aggiornare la percentuale di completamento
   useEffect(() => {
@@ -14,14 +14,16 @@ const Timer = (props) => {
       (props.minutesValue * 60 + props.secondsValue);
     // Calcola la percentuale di completamento
     const newPercentage =
-      (elapsedTimeInSeconds / props.initialTotalSeconds) * 100;
+      ((props.initialTotalSeconds - elapsedTimeInSeconds) /
+        props.initialTotalSeconds) *
+      100;
     setPercentage(newPercentage);
   }, [props.minutesValue, props.secondsValue, props.initialTotalSeconds]);
 
   // Effetto per gestire il reset del timer
   useEffect(() => {
     if (props.resetTimer) {
-      setPercentage(0);
+      setPercentage(100); // Riempie di nuovo la barra
       // Reimposta lo stato resetTimer a false dopo aver gestito il reset
       props.onResetTimerComplete();
     }
@@ -40,14 +42,14 @@ const Timer = (props) => {
     <section>
       <div>
         <CircularProgressbar
-          className="w-96 h-96 text-textColor font-petrona"
+          className="progress-bar w-96 h-96 text-textColor font-petrona mb-3"
           value={percentage}
           text={`${formattedMinutes}:${formattedSeconds}`}
           styles={buildStyles({
             rotation: 0.25,
             strokeLinecap: "round",
             textSize: "16px",
-            pathTransitionDuration: 0.5,
+            pathTransitionDuration: 0.1,
             pathColor: "#5EA9BE",
             textColor: "#222222",
             trailColor: "#d6d6d6",
