@@ -48,7 +48,7 @@ const TimerSection = () => {
             };
           }
         });
-      }, 20);
+      }, 1000);
     }
     return () => {
       if (interval) {
@@ -112,7 +112,11 @@ const TimerSection = () => {
         <ButtonTimer img="restart" onChange={handleRestartClick} />
       </div>
       <div className="grid md:flex md:flex-row  md:justify-center md:space-x-10 my-24">
-        <ButtonMinutes onClick={addFiveMin} />
+        <ButtonMinutes
+          addFiveMin={addFiveMin}
+          addTenMin={addTenMin}
+          addFifteenMin={addFifteenMin}
+        />
       </div>
       <ButtonSounds />
     </section>
