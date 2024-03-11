@@ -1,4 +1,3 @@
-// TimerSection.jsx
 import React, { useState, useEffect } from "react";
 import ButtonTemplate from "./ButtonTemplate";
 import Timer from "./Timer";
@@ -16,78 +15,63 @@ const TimerSection = () => {
     { img: "../assets/images/read.svg" },
   ];
 
-  // Stato per il pulsante di play/pausa
+  // Stati del componente
   const [isPlay, setIsPlay] = useState(false);
   const [time, setTime] = useState({
     minutes: 0,
     seconds: 0,
   });
+  const [initialTotalSeconds, setInitialTotalSeconds] = useState(0);
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const [isFinished, setIsFinished] = useState(false); //  stato per indicare se il timer è terminato
 
-  // Gestore dell'incrementare e fermare timer
+  // Effetto per il conteggio del tempo
   useEffect(() => {
     let interval;
     if (isPlay) {
+      // Avvia l'intervallo se il timer è in riproduzione
       interval = setInterval(() => {
-        setTime((prevTime) => {
-          if (prevTime.minutes == 0 && prevTime.seconds <= 0) {
-            setIsPlay(false);
-            return {
-              minutes: 0,
-              seconds: 0,
-            };
-          }
-          if (prevTime.seconds <= 0) {
-            return { ...prevTime, seconds: 59 };
-          } else {
-            return {
-              minutes:
-                prevTime.seconds === 59
-                  ? prevTime.minutes - 1
-                  : prevTime.minutes,
-              seconds: prevTime.seconds - 1,
-            };
-          }
-        });
+        setElapsedSeconds((prevElapsedSeconds) => prevElapsedSeconds + 1);
       }, 1000);
     }
-    return () => {
-      if (interval) {
-        clearInterval(interval);
-      }
-    };
+    return () => clearInterval(interval); // Pulisce l'intervallo quando il componente viene smontato
   }, [isPlay]);
 
-  const addFiveMin = () => {
-    setTime({
-      minutes: 5,
-      seconds: 0,
-    });
-  };
-  const addTenMin = () => {
-    setTime({
-      minutes: 10,
-      seconds: 0,
-    });
-  };
-  const addFifteenMin = () => {
-    setTime({
-      minutes: 15,
-      seconds: 0,
-    });
-  };
+  // Effetto per gestire il reset del timer
+  useEffect(() => {
+    const totalSeconds = time.minutes * 60 + time.seconds;
+    setInitialTotalSeconds(totalSeconds);
+    setElapsedSeconds(0);
+    setIsFinished(false);
+  }, [time]);
 
+  // Effetto per controllare se il timer è terminato
+
+  useEffect(() => {
+    if (initialTotalSeconds - elapsedSeconds <= 0) {
+      setIsFinished(true);
+      setIsPlay(false);
+    }
+  }, [initialTotalSeconds, elapsedSeconds]);
+
+  // Funzione per gestire il clic del pulsante di riproduzione/pausa
   const handleButtonClick = () => {
     setIsPlay(!isPlay);
   };
 
-  // Gestore del clic del pulsante restart
+  // Funzione per gestire il clic del pulsante di riavvio
   const handleRestartClick = () => {
     setIsPlay(false);
-    setTime({
-      minutes: 0,
-      seconds: 0,
-    });
+    setTime({ minutes: 0, seconds: 0 });
   };
+
+  const addFiveMin = () => setTime({ minutes: 5, seconds: 0 });
+  const addTenMin = () => setTime({ minutes: 10, seconds: 0 });
+  const addFifteenMin = () => setTime({ minutes: 15, seconds: 0 });
+
+  // Calcolo dei valori dei minuti e dei secondi
+  const minutesValue = Math.floor((initialTotalSeconds - elapsedSeconds) / 60);
+  const secondsValue = (initialTotalSeconds - elapsedSeconds) % 60;
 
   return (
     <section className="section-timer border-2 border-red-900 flex flex-col mt-24 ">
@@ -102,7 +86,12 @@ const TimerSection = () => {
         ))}
       </div>
       <div className="container-timer border-2  border-orange-700 flex justify-center">
-        <Timer secondsValue={time.seconds} minutesValue={time.minutes} />
+        <Timer
+          secondsValue={secondsValue}
+          minutesValue={minutesValue}
+          initialTotalSeconds={initialTotalSeconds}
+          isFinished={isFinished}
+        />
       </div>
       <div className="container-timer border-2  border-orange-700 flex justify-center">
         <ButtonTimer
@@ -111,7 +100,7 @@ const TimerSection = () => {
         />
         <ButtonTimer img="restart" onChange={handleRestartClick} />
       </div>
-      <div className="grid md:flex md:flex-row  md:justify-center md:space-x-10 my-24">
+      <div className="grid md:flex md:flex-row md:justify-center md:space-x-10 my-24">
         <ButtonMinutes
           addFiveMin={addFiveMin}
           addTenMin={addTenMin}
