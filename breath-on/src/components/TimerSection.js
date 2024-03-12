@@ -26,6 +26,23 @@ const TimerSection = () => {
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
   const [resetTimer, setResetTimer] = useState(false);
+  const [loaderTime, setLoaderTime] = useState(3);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setLoaderTime((prevLoad) => {
+        console.log(prevLoad);
+        if (prevLoad === 0) {
+          clearInterval(timer);
+        }
+        return prevLoad - 1;
+      });
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
 
   // Effetto per il conteggio del tempo
   useEffect(() => {
@@ -81,43 +98,53 @@ const TimerSection = () => {
   const secondsValue = (initialTotalSeconds - elapsedSeconds) % 60;
 
   return (
-    <section className="section-timer border-2 border-red-900 flex flex-col  relative">
-      <div className="flex border-2 border-blue-900 justify-center items-center sm:space-x-10 space-x-20 xl:space-x-60">
-        {buttonTemplateData1.map((item, index) => (
-          <ButtonTemplate key={index} img={item.img} onChange={item.onChange} />
-        ))}
-      </div>
-      <div className="flex justify-around xl:space-x-40 sm:space-x-16 ">
-        {buttonTemplateData2.map((item, index) => (
-          <ButtonTemplate key={index} img={item.img} />
-        ))}
-      </div>
+    <>
+      {loaderTime <= 0 ? (
+        <section className="section-timer border-2 border-red-900 flex flex-col  relative">
+          <div className="flex border-2 border-blue-900 justify-center items-center sm:space-x-10 space-x-20 xl:space-x-60">
+            {buttonTemplateData1.map((item, index) => (
+              <ButtonTemplate
+                key={index}
+                img={item.img}
+                onChange={item.onChange}
+              />
+            ))}
+          </div>
+          <div className="flex justify-around xl:space-x-40 sm:space-x-16 ">
+            {buttonTemplateData2.map((item, index) => (
+              <ButtonTemplate key={index} img={item.img} />
+            ))}
+          </div>
 
-      <Timer
-        secondsValue={secondsValue}
-        minutesValue={minutesValue}
-        initialTotalSeconds={initialTotalSeconds}
-        isFinished={isFinished}
-        resetTimer={resetTimer}
-        onResetTimerComplete={() => setResetTimer(false)}
-      />
+          <Timer
+            secondsValue={secondsValue}
+            minutesValue={minutesValue}
+            initialTotalSeconds={initialTotalSeconds}
+            isFinished={isFinished}
+            resetTimer={resetTimer}
+            onResetTimerComplete={() => setResetTimer(false)}
+          />
 
-      <div className="container-timerbutton border-2  border-orange-700 flex justify-center space-x-24 mt-56 xl:mt-80 sm:mt-96">
-        <ButtonTimer
-          img={isPlay ? "pause" : "play"}
-          onChange={handleButtonClick}
-        />
-        <ButtonTimer img="restart" onChange={handleRestartClick} />
-      </div>
-      <div className="grid md:flex md:flex-row md:justify-center md:space-x-10 my-10">
-        <ButtonMinutes
-          addFiveMin={addFiveMin}
-          addTenMin={addTenMin}
-          addFifteenMin={addFifteenMin}
-        />
-      </div>
-      <ButtonSounds />
-    </section>
+          <div className="container-timerbutton border-2  border-orange-700 flex justify-center space-x-24 mt-56 xl:mt-80 sm:mt-96">
+            <ButtonTimer
+              img={isPlay ? "pause" : "play"}
+              onChange={handleButtonClick}
+            />
+            <ButtonTimer img="restart" onChange={handleRestartClick} />
+          </div>
+          <div className="grid md:flex md:flex-row md:justify-center md:space-x-10 my-10">
+            <ButtonMinutes
+              addFiveMin={addFiveMin}
+              addTenMin={addTenMin}
+              addFifteenMin={addFifteenMin}
+            />
+          </div>
+          <ButtonSounds />
+        </section>
+      ) : (
+        <TextSection />
+      )}
+    </>
   );
 };
 
