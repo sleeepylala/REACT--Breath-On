@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 const ButtonSounds = () => {
   const [audioState, setAudioState] = useState({});
+  const [colorPressed, setColorPressed] = useState({});
+
   const buttonSounds = [
     {
       img: "../assets/images/fire.svg",
@@ -47,9 +49,11 @@ const ButtonSounds = () => {
       const newAudio = new Audio(sound);
       newAudio.play();
       setAudioState((prevState) => ({ ...prevState, [sound]: newAudio }));
+      setColorPressed((prevColor) => ({ ...prevColor, [sound]: "#FFD6CB" }));
     } else {
       // Se l'audio è attualmente in riproduzione, mettilo in pausa
       audio.pause();
+      setColorPressed((prevColor) => ({ ...prevColor, [sound]: "#fff" }));
     }
   };
 
@@ -62,6 +66,9 @@ const ButtonSounds = () => {
         >
           <button
             className="border rounded-full bg-white flex items-center justify-center w-24 h-24 "
+            style={{
+              backgroundColor: colorPressed[item.sound],
+            }}
             onClick={() => toggleSound(item.sound)}
           >
             <img src={item.img} alt="iconsounds-button" />
