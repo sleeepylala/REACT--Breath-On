@@ -42,7 +42,7 @@ const Timer = (props) => {
     <section>
       <div>
         <CircularProgressbar
-          className="progress-bar w-96 h-96 text-textColor font-petrona mb-3"
+          className="progress-bar w-96 h-96 text-textColor font-petrona mb-3 absolute xl:top-80  sm:top-96 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 "
           value={percentage}
           text={`${formattedMinutes}:${formattedSeconds}`}
           styles={buildStyles({

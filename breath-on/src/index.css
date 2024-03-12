@@ -24,3 +24,13 @@ body {
 .progress-bar .CircularProgressbar-path {
   stroke-width: 3px; /* Imposta lo spessore desiderato */
 }
+
+@media (max-width: 640px) {
+  .progress-bar {
+    position: static;
+    transform: none;
+  }
+  .container-timerbutton {
+    margin-top: 0;
+  }
+}

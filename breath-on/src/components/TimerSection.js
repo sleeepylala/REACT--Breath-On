@@ -4,6 +4,7 @@ import Timer from "./Timer";
 import ButtonSounds from "./ButtonSounds";
 import ButtonMinutes from "./ButtonMinutes";
 import ButtonTimer from "./ButtonTimer";
+import TextSection from "./TextSection";
 
 const TimerSection = () => {
   const buttonTemplateData1 = [
@@ -80,35 +81,35 @@ const TimerSection = () => {
   const secondsValue = (initialTotalSeconds - elapsedSeconds) % 60;
 
   return (
-    <section className="section-timer border-2 border-red-900 flex flex-col mt-24 ">
+    <section className="section-timer border-2 border-red-900 flex flex-col  relative">
       <div className="flex border-2 border-blue-900 justify-center items-center sm:space-x-10 space-x-20 xl:space-x-60">
         {buttonTemplateData1.map((item, index) => (
           <ButtonTemplate key={index} img={item.img} onChange={item.onChange} />
         ))}
       </div>
-      <div className="flex justify-around xl:space-x-40 sm:space-x-16">
+      <div className="flex justify-around xl:space-x-40 sm:space-x-16 ">
         {buttonTemplateData2.map((item, index) => (
           <ButtonTemplate key={index} img={item.img} />
         ))}
       </div>
-      <div className="container-timer border-2  border-orange-700 flex justify-center">
-        <Timer
-          secondsValue={secondsValue}
-          minutesValue={minutesValue}
-          initialTotalSeconds={initialTotalSeconds}
-          isFinished={isFinished}
-          resetTimer={resetTimer}
-          onResetTimerComplete={() => setResetTimer(false)} // Funzione di callback per reimpostare resetTimer a false
-        />
-      </div>
-      <div className="container-timer border-2  border-orange-700 flex justify-center space-x-24">
+
+      <Timer
+        secondsValue={secondsValue}
+        minutesValue={minutesValue}
+        initialTotalSeconds={initialTotalSeconds}
+        isFinished={isFinished}
+        resetTimer={resetTimer}
+        onResetTimerComplete={() => setResetTimer(false)}
+      />
+
+      <div className="container-timerbutton border-2  border-orange-700 flex justify-center space-x-24 mt-56 xl:mt-80 sm:mt-96">
         <ButtonTimer
           img={isPlay ? "pause" : "play"}
           onChange={handleButtonClick}
         />
         <ButtonTimer img="restart" onChange={handleRestartClick} />
       </div>
-      <div className="grid md:flex md:flex-row md:justify-center md:space-x-10 my-24">
+      <div className="grid md:flex md:flex-row md:justify-center md:space-x-10 my-10">
         <ButtonMinutes
           addFiveMin={addFiveMin}
           addTenMin={addTenMin}

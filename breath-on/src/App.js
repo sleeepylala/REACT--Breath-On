@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import Footer from "./components/Footer";
 import TextSection from "./components/TextSection";
 import TimerSection from "./components/TimerSection";
+import Timer from "./components/Timer";
 
 function App() {
   return (
@@ -15,9 +16,9 @@ function App() {
         <div className="content-wrapper">
           <Routes>
             <Route exact path="/" element={<Home />} />
+
+            <Route exact path="/timer" element={<TimerSection />} />
           </Routes>
-          <TextSection />
-          <TimerSection />
         </div>
 
         <Footer />
