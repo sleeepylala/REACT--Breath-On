@@ -1,17 +1,30 @@
 import React from "react";
+import { TypeAnimation } from "react-type-animation";
+import { motion } from "framer-motion";
 
 const TextSection = () => {
   return (
-    <section className="my-7 bg-[#FFD6CB]">
-      <div className="flex flex-col items-center py-16">
-        <h2 className="text-primary font-petit-formal-script text-2xl md:text-3xl lg:text-4xl mb-5 ">
-          Take your time
-        </h2>
-        <p className="text-textColor font-petrona text-lg lg:text-xl">
-          Select your favourite sound and start meditate
-        </p>
-      </div>
-    </section>
+    <div className=" h-screen flex justify-center items-center">
+      <section className="py-20 bg-[#FFD6CB] w-full">
+        <motion.div
+          className="flex flex-col items-center justify-center "
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h2 className=" text-textColor font-petit-formal-script text-2xl md:text-3xl lg:text-4xl ">
+            <span> Take your </span>
+            <TypeAnimation
+              sequence={["Time", 1000, "Relax", 1000, "Space", 1000]}
+              wrapper="span"
+              speed={50}
+              repeat={Infinity}
+              className="text-primary"
+            />
+          </h2>
+        </motion.div>
+      </section>
+    </div>
   );
 };
 
