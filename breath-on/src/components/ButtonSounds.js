@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const ButtonSounds = () => {
   const [audioState, setAudioState] = useState({});
   const [colorPressed, setColorPressed] = useState({});
+  const [putBorder, setPutBorder] = useState({});
 
   const buttonSounds = [
     {
@@ -50,10 +51,12 @@ const ButtonSounds = () => {
       newAudio.play();
       setAudioState((prevState) => ({ ...prevState, [sound]: newAudio }));
       setColorPressed((prevColor) => ({ ...prevColor, [sound]: "#FFD6CB" }));
+      setPutBorder((prevBorder) => ({ ...prevBorder, [sound]: true }));
     } else {
       // Se l'audio è attualmente in riproduzione, mettilo in pausa
       audio.pause();
       setColorPressed((prevColor) => ({ ...prevColor, [sound]: "#fff" }));
+      setPutBorder((prevBorder) => ({ ...prevBorder, [sound]: false }));
     }
   };
 
@@ -65,9 +68,10 @@ const ButtonSounds = () => {
           className="flex flex-col items-center justify-around m-2"
         >
           <button
-            className="border rounded-full bg-white flex items-center justify-center w-24 h-24 "
+            className="rounded-full bg-white flex items-center justify-center w-24 h-24 "
             style={{
               backgroundColor: colorPressed[item.sound],
+              border: putBorder[item.sound] ? "3px solid #5EA9BE" : "none",
             }}
             onClick={() => toggleSound(item.sound)}
           >
