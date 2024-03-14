@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const ButtonSounds = () => {
   const [audioState, setAudioState] = useState({});
   const [colorPressed, setColorPressed] = useState({});
   const [putBorder, setPutBorder] = useState({});
+  const [volumeLevel, setVolumeLevel] = useState({});
 
   const buttonSounds = [
     {
@@ -62,6 +63,16 @@ const ButtonSounds = () => {
     }
   };
 
+  // Funzione per gestire il cambiamento del volume.
+  const handleVolumeChange = (event, index) => {
+    const volume = event.target.value / 100;
+    const audio = audioState[index];
+    if (audio) {
+      audio.volume = volume;
+      setVolumeLevel((prevVolume) => ({ ...prevVolume, [index]: volume }));
+    }
+  };
+
   return (
     <div className="container-sounds border-3 border-black items-center justify-around sm:grid sm:grid-cols-3 md:grid-cols-4 lg:flex lg:flex-row">
       {buttonSounds.map((item, index) => (
@@ -86,7 +97,17 @@ const ButtonSounds = () => {
               type="range"
               min="0"
               max="100"
-              value="50"
+              defaultValue={volumeLevel[item.sound] * 100}
+              onChange={(event) => handleVolumeChange(event, item.sound)}
+              style={{
+                background: `linear-gradient(
+              to right,
+              #5ea9be 0%,
+              #5ea9be ${volumeLevel[item.sound] * 100}%,
+              rgba(94, 169, 190, 0.5) ${volumeLevel[item.sound] * 100}%,
+              rgba(94, 169, 190, 0.5) 100%
+            )`,
+              }}
             />
           )}
 
