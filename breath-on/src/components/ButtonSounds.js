@@ -79,18 +79,20 @@ const ButtonSounds = () => {
           >
             <img src={item.img} alt="iconsounds-button" />
           </button>
+          {audioState[item.sound] && !audioState[item.sound].paused && (
+            <input
+              className="w-20 mt-3"
+              id="volume-control"
+              type="range"
+              min="0"
+              max="100"
+              value="50"
+            />
+          )}
 
           <p className="text-textColor font-petrona xl:text-xl mt-2">
             {item.title}
           </p>
-          <input
-            className="w-20 mt-1"
-            id="volume-control"
-            type="range"
-            min="0"
-            max="100"
-            value="50"
-          ></input>
         </div>
       ))}
     </div>
