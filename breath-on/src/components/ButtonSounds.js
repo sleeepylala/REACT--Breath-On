@@ -48,7 +48,9 @@ const ButtonSounds = () => {
     if (!audio || audio.paused) {
       // Se l'audio non è stato creato o è in pausa, crealo e avvialo
       const newAudio = new Audio(sound);
+      newAudio.loop = true;
       newAudio.play();
+
       setAudioState((prevState) => ({ ...prevState, [sound]: newAudio }));
       setColorPressed((prevColor) => ({ ...prevColor, [sound]: "#FFD6CB" }));
       setPutBorder((prevBorder) => ({ ...prevBorder, [sound]: true }));
@@ -77,9 +79,18 @@ const ButtonSounds = () => {
           >
             <img src={item.img} alt="iconsounds-button" />
           </button>
+
           <p className="text-textColor font-petrona xl:text-xl mt-2">
             {item.title}
           </p>
+          <input
+            className="w-20 mt-1"
+            id="volume-control"
+            type="range"
+            min="0"
+            max="100"
+            value="50"
+          ></input>
         </div>
       ))}
     </div>
