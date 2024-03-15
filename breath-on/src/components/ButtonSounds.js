@@ -7,7 +7,7 @@ const ButtonSounds = () => {
   const [colorPressed, setColorPressed] = useState({});
   const [putBorder, setPutBorder] = useState({});
   const [volumeLevel, setVolumeLevel] = useState({});
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false); //stato per vedere se è mobile e mettere il carosello
 
   const buttonSounds = [
     {
@@ -53,7 +53,7 @@ const ButtonSounds = () => {
       // Se l'audio non è stato creato o è in pausa, crealo e avvialo
       const newAudio = new Audio(sound);
       newAudio.loop = true;
-      newAudio.volume = 0.5;
+
       newAudio.play();
 
       setAudioState((prevState) => ({ ...prevState, [sound]: newAudio }));
@@ -77,6 +77,7 @@ const ButtonSounds = () => {
     }
   };
 
+  // Hook di effetto per gestire il ridimensionamento della finestra per il carosello
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 640);
@@ -85,10 +86,18 @@ const ButtonSounds = () => {
     handleResize();
 
     window.addEventListener("resize", handleResize); // Aggiunge un listener per il ridimensionamento della finestra
-
     return () => {
       window.removeEventListener("resize", handleResize); // Pulisce il listener al momento dello smontaggio del componente
     };
+  }, []);
+
+  // Inizializzazione dei livelli di volume
+  useEffect(() => {
+    const initialVolumeLevels = buttonSounds.reduce((acc, curr) => {
+      acc[curr.sound] = 0.5; // Imposta il volume predefinito a metà (50)
+      return acc;
+    }, {});
+    setVolumeLevel(initialVolumeLevels);
   }, []);
 
   return (
@@ -117,7 +126,6 @@ const ButtonSounds = () => {
               partialVisibilityGutter: 30,
             },
           }}
-          showDots
           sliderClass=""
           slidesToSlide={1}
           swipeable
