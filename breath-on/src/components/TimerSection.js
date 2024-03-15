@@ -8,12 +8,12 @@ import TextSection from "./TextSection";
 
 const TimerSection = () => {
   const buttonTemplateData1 = [
-    { img: "../assets/images/focus.svg" },
-    { img: "../assets/images/sleep.svg" },
+    { img: "../assets/images/focus.svg", value: "focus" },
+    { img: "../assets/images/sleep.svg", value: "sleep" },
   ];
   const buttonTemplateData2 = [
-    { img: "../assets/images/mind.svg" },
-    { img: "../assets/images/read.svg" },
+    { img: "../assets/images/mind.svg", value: "mind" },
+    { img: "../assets/images/read.svg", value: "read" },
   ];
 
   // Stati del componente
@@ -113,12 +113,13 @@ const TimerSection = () => {
               key={index}
               img={item.img}
               onChange={item.onChange}
+              value={item.value}
             />
           ))}
         </div>
         <div className="flex justify-around xl:space-x-40 sm:space-x-16 ">
           {buttonTemplateData2.map((item, index) => (
-            <ButtonTemplate key={index} img={item.img} />
+            <ButtonTemplate key={index} img={item.img} value={item.value} />
           ))}
         </div>
 
