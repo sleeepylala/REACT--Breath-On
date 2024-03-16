@@ -11,7 +11,7 @@ import Timer from "./components/Timer";
 function App() {
   return (
     <Router>
-      <main className=" min-h-screen flex-col">
+      <main>
         <Navbar />
         <div className="content-wrapper">
           <Routes>
