@@ -5,17 +5,10 @@ import ButtonSounds from "./ButtonSounds";
 import ButtonMinutes from "./ButtonMinutes";
 import ButtonTimer from "./ButtonTimer";
 import TextSection from "./TextSection";
+import { buttonTemplateData1 } from "../assets/icons";
+import { buttonTemplateData2 } from "../assets/icons";
 
 const TimerSection = () => {
-  const buttonTemplateData1 = [
-    { img: "../assets/images/focus.svg", value: "focus" },
-    { img: "../assets/images/sleep.svg", value: "sleep" },
-  ];
-  const buttonTemplateData2 = [
-    { img: "../assets/images/mind.svg", value: "mind" },
-    { img: "../assets/images/read.svg", value: "read" },
-  ];
-
   // Stati del componente
   const [isPlay, setIsPlay] = useState(false);
   const [time, setTime] = useState({

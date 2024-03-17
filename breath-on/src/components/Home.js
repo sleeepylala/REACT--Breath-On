@@ -1,6 +1,7 @@
 import React from "react";
 import { FaArrowRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import hero from "../assets/images/hero-img.svg";
 
 const Home = () => {
   return (
@@ -20,7 +21,7 @@ const Home = () => {
         </div>
 
         <div className="col-span-6">
-          <img src="./assets/images/hero-img.svg" alt="hero" />
+          <img src={hero} alt="hero" />
         </div>
       </div>
     </section>

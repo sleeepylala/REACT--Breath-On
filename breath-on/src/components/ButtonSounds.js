@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "react-multi-carousel/lib/styles.css";
 import Carousel from "react-multi-carousel";
+import { buttonSoundsObj } from "../assets/icons";
 
 const ButtonSounds = () => {
   const [audioState, setAudioState] = useState({});
@@ -16,50 +17,50 @@ const ButtonSounds = () => {
     setHoveredButton(null);
   };
 
-  const buttonSounds = [
-    {
-      img: "../../assets/images/fire.svg",
-      imgWhite: "../assets/images/fire-white.svg",
-      title: "fire",
-      sound: "../assets/sounds/campfiresound.wav",
-    },
-    {
-      img: "../assets/images/waves.svg",
-      imgWhite: "../assets/images/waves-white.svg",
-      title: "waves",
-      sound: "../assets/sounds/wavessound.wav",
-    },
-    {
-      img: "../assets/images/water.svg",
-      imgWhite: "../assets/images/water-white.svg",
-      title: "water",
-      sound: "../assets/sounds/watersound.mp3",
-    },
-    {
-      img: "../assets/images/piano.svg",
-      imgWhite: "../assets/images/piano-white.svg",
-      title: "piano",
-      sound: "../assets/sounds/pianosound.mp3",
-    },
-    {
-      img: "../assets/images/wind.svg",
-      imgWhite: "../assets/images/wind-white.svg",
-      title: "wind",
-      sound: "../assets/sounds/windsound.wav",
-    },
-    {
-      img: "../assets/images/bird.svg",
-      imgWhite: "../assets/images/bird-white.svg",
-      title: "chirping",
-      sound: "../assets/sounds/chirping.wav",
-    },
-    {
-      img: "../assets/images/bells.svg",
-      imgWhite: "../assets/images/bells-white.svg",
-      title: "bells",
-      sound: "../assets/sounds/bellssound.wav",
-    },
-  ];
+  // const buttonSounds = [
+  //   {
+  //     img: fire,
+  //     imgWhite: "../assets/images/fire-white.svg",
+  //     title: "fire",
+  //     sound: "../assets/sounds/campfiresound.wav",
+  //   },
+  //   {
+  //     img: "../assets/images/waves.svg",
+  //     imgWhite: "../assets/images/waves-white.svg",
+  //     title: "waves",
+  //     sound: "../assets/sounds/wavessound.wav",
+  //   },
+  //   {
+  //     img: "../assets/images/water.svg",
+  //     imgWhite: "../assets/images/water-white.svg",
+  //     title: "water",
+  //     sound: "../assets/sounds/watersound.mp3",
+  //   },
+  //   {
+  //     img: "../assets/images/piano.svg",
+  //     imgWhite: "../assets/images/piano-white.svg",
+  //     title: "piano",
+  //     sound: "../assets/sounds/pianosound.mp3",
+  //   },
+  //   {
+  //     img: "../assets/images/wind.svg",
+  //     imgWhite: "../assets/images/wind-white.svg",
+  //     title: "wind",
+  //     sound: "../assets/sounds/windsound.wav",
+  //   },
+  //   {
+  //     img: "../assets/images/bird.svg",
+  //     imgWhite: "../assets/images/bird-white.svg",
+  //     title: "chirping",
+  //     sound: "../assets/sounds/chirping.wav",
+  //   },
+  //   {
+  //     img: "../assets/images/bells.svg",
+  //     imgWhite: "../assets/images/bells-white.svg",
+  //     title: "bells",
+  //     sound: "../assets/sounds/bellssound.wav",
+  //   },
+  // ];
 
   const toggleSound = (sound) => {
     const audio = audioState[sound];
@@ -103,7 +104,7 @@ const ButtonSounds = () => {
 
   // Inizializzazione dei livelli di volume
   useEffect(() => {
-    const initialVolumeLevels = buttonSounds.reduce((acc, curr) => {
+    const initialVolumeLevels = buttonSoundsObj.reduce((acc, curr) => {
       acc[curr.sound] = 0.5; // Imposta il volume predefinito a metà (50)
       return acc;
     }, {});
@@ -140,7 +141,7 @@ const ButtonSounds = () => {
           slidesToSlide={1}
           swipeable
         >
-          {buttonSounds.map((item, index) => (
+          {buttonSoundsObj.map((item, index) => (
             <div
               key={index}
               className="flex flex-col items-center justify-around m-2"
@@ -192,7 +193,7 @@ const ButtonSounds = () => {
           ))}
         </Carousel>
       ) : (
-        buttonSounds.map((item, index) => (
+        buttonSoundsObj.map((item, index) => (
           <div
             key={index}
             className="flex flex-col items-center justify-around m-2"
