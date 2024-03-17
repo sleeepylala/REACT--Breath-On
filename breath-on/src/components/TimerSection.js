@@ -88,6 +88,19 @@ const TimerSection = () => {
   const addTenMin = () => setTime({ minutes: 10, seconds: 0 });
   const addFifteenMin = () => setTime({ minutes: 15, seconds: 0 });
 
+  const toggleMind = () => {
+    setTime({ minutes: 10, seconds: 0 });
+  };
+  const toggleRead = () => {
+    setTime({ minutes: 20, seconds: 0 });
+  };
+  const toggleSleep = () => {
+    setTime({ minutes: 30, seconds: 0 });
+  };
+  const toggleFocus = () => {
+    setTime({ minutes: 25, seconds: 0 });
+  };
+
   // Calcolo dei valori dei minuti e dei secondi
   const minutesValue = Math.floor((initialTotalSeconds - elapsedSeconds) / 60);
   const secondsValue = (initialTotalSeconds - elapsedSeconds) % 60;
@@ -107,12 +120,33 @@ const TimerSection = () => {
               img={item.img}
               onChange={item.onChange}
               value={item.value}
+              onClick={item.onClick}
+              toggleFunction={
+                item.value === "sleep"
+                  ? toggleSleep
+                  : item.value === "focus"
+                  ? toggleFocus
+                  : null
+              }
             />
           ))}
         </div>
         <div className="flex justify-around xl:space-x-40 sm:space-x-16 ">
           {buttonTemplateData2.map((item, index) => (
-            <ButtonTemplate key={index} img={item.img} value={item.value} />
+            <ButtonTemplate
+              key={index}
+              img={item.img}
+              onChange={item.onChange}
+              value={item.value}
+              onClick={item.onClick}
+              toggleFunction={
+                item.value === "mind"
+                  ? toggleMind
+                  : item.value === "read"
+                  ? toggleRead
+                  : null
+              }
+            />
           ))}
         </div>
 

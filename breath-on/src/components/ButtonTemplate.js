@@ -18,7 +18,7 @@ const ButtonTemplate = (props) => {
         backgroundColor: isHover ? "#5EA9BE" : "#fff",
         transition: "background-color 0.8s ease, opacity 1s ease",
       }}
-      onClick={props.onClick}
+      onClick={props.toggleFunction}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

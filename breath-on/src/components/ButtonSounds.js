@@ -140,10 +140,6 @@ const ButtonSounds = () => {
                   }}
                 />
               )}
-
-              <p className="text-textColor font-petrona xl:text-xl mt-2">
-                {item.title}
-              </p>
             </div>
           ))}
         </Carousel>
