@@ -7,6 +7,10 @@ import ButtonTimer from "./ButtonTimer";
 import TextSection from "./TextSection";
 import { buttonTemplateData1 } from "../assets/icons";
 import { buttonTemplateData2 } from "../assets/icons";
+import mindSound from "../assets/sounds/campfiresound.wav";
+import readSound from "../assets/sounds/chirping.wav";
+import sleepSound from "../assets/sounds/wavessound.wav";
+import focusSound from "../assets/sounds/bellssound.wav";
 
 const TimerSection = () => {
   // Stati del componente
@@ -90,15 +94,23 @@ const TimerSection = () => {
 
   const toggleMind = () => {
     setTime({ minutes: 10, seconds: 0 });
+    playSound(mindSound);
   };
   const toggleRead = () => {
     setTime({ minutes: 20, seconds: 0 });
+    playSound(readSound);
   };
   const toggleSleep = () => {
     setTime({ minutes: 30, seconds: 0 });
+    playSound(sleepSound);
   };
   const toggleFocus = () => {
     setTime({ minutes: 25, seconds: 0 });
+    playSound(focusSound);
+  };
+  const playSound = (sound) => {
+    const audio = new Audio(sound);
+    audio.play();
   };
 
   // Calcolo dei valori dei minuti e dei secondi
