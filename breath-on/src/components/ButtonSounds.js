@@ -17,51 +17,6 @@ const ButtonSounds = () => {
     setHoveredButton(null);
   };
 
-  // const buttonSounds = [
-  //   {
-  //     img: fire,
-  //     imgWhite: "../assets/images/fire-white.svg",
-  //     title: "fire",
-  //     sound: "../assets/sounds/campfiresound.wav",
-  //   },
-  //   {
-  //     img: "../assets/images/waves.svg",
-  //     imgWhite: "../assets/images/waves-white.svg",
-  //     title: "waves",
-  //     sound: "../assets/sounds/wavessound.wav",
-  //   },
-  //   {
-  //     img: "../assets/images/water.svg",
-  //     imgWhite: "../assets/images/water-white.svg",
-  //     title: "water",
-  //     sound: "../assets/sounds/watersound.mp3",
-  //   },
-  //   {
-  //     img: "../assets/images/piano.svg",
-  //     imgWhite: "../assets/images/piano-white.svg",
-  //     title: "piano",
-  //     sound: "../assets/sounds/pianosound.mp3",
-  //   },
-  //   {
-  //     img: "../assets/images/wind.svg",
-  //     imgWhite: "../assets/images/wind-white.svg",
-  //     title: "wind",
-  //     sound: "../assets/sounds/windsound.wav",
-  //   },
-  //   {
-  //     img: "../assets/images/bird.svg",
-  //     imgWhite: "../assets/images/bird-white.svg",
-  //     title: "chirping",
-  //     sound: "../assets/sounds/chirping.wav",
-  //   },
-  //   {
-  //     img: "../assets/images/bells.svg",
-  //     imgWhite: "../assets/images/bells-white.svg",
-  //     title: "bells",
-  //     sound: "../assets/sounds/bellssound.wav",
-  //   },
-  // ];
-
   const toggleSound = (sound) => {
     const audio = audioState[sound];
     if (!audio || audio.paused) {
@@ -105,7 +60,7 @@ const ButtonSounds = () => {
   // Inizializzazione dei livelli di volume
   useEffect(() => {
     const initialVolumeLevels = buttonSoundsObj.reduce((acc, curr) => {
-      acc[curr.sound] = 0.5; // Imposta il volume predefinito a metà (50)
+      acc[curr.sound] = 0.8; // Imposta il volume predefinito
       return acc;
     }, {});
     setVolumeLevel(initialVolumeLevels);
@@ -147,7 +102,7 @@ const ButtonSounds = () => {
               className="flex flex-col items-center justify-around m-2"
             >
               <button
-                className="rounded-full bg-white flex items-center justify-center w-24 h-24 "
+                className="rounded-full bg-white flex items-center justify-center w-24 h-24 shadow-md"
                 style={{
                   background: hoveredButton === index ? "#5EA9BE" : "#FFFFFF",
                 }}
@@ -199,7 +154,7 @@ const ButtonSounds = () => {
             className="flex flex-col items-center justify-around m-2"
           >
             <button
-              className="rounded-full bg-white flex items-center justify-center w-24 h-24 "
+              className="rounded-full bg-white flex items-center justify-center w-24 h-24 shadow-md"
               style={{
                 background: hoveredButton === index ? "#5EA9BE" : "#FFFFFF",
               }}

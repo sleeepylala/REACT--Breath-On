@@ -13,7 +13,7 @@ const ButtonTemplate = (props) => {
 
   return (
     <button
-      className="button-template border rounded-full bg-white flex justify-center items-center h-28 w-28"
+      className="button-template border rounded-full bg-white flex justify-center items-center h-28 w-28 shadow-md"
       style={{
         backgroundColor: isHover ? "#5EA9BE" : "#fff",
         transition: "background-color 0.8s ease, opacity 1s ease",
