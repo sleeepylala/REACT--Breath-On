@@ -4,44 +4,58 @@ import Carousel from "react-multi-carousel";
 
 const ButtonSounds = () => {
   const [audioState, setAudioState] = useState({});
-  const [colorPressed, setColorPressed] = useState({});
-  const [putBorder, setPutBorder] = useState({});
   const [volumeLevel, setVolumeLevel] = useState({});
   const [isMobile, setIsMobile] = useState(false); //stato per vedere se è mobile e mettere il carosello
+  const [hoveredButton, setHoveredButton] = useState(null);
+
+  const handleMouseEnter = (index) => {
+    setHoveredButton(index);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredButton(null);
+  };
 
   const buttonSounds = [
     {
-      img: "../assets/images/fire.svg",
+      img: "../../assets/images/fire.svg",
+      imgWhite: "../assets/images/fire-white.svg",
       title: "fire",
       sound: "../assets/sounds/campfiresound.wav",
     },
     {
       img: "../assets/images/waves.svg",
+      imgWhite: "../assets/images/waves-white.svg",
       title: "waves",
       sound: "../assets/sounds/wavessound.wav",
     },
     {
       img: "../assets/images/water.svg",
+      imgWhite: "../assets/images/water-white.svg",
       title: "water",
       sound: "../assets/sounds/watersound.mp3",
     },
     {
       img: "../assets/images/piano.svg",
+      imgWhite: "../assets/images/piano-white.svg",
       title: "piano",
       sound: "../assets/sounds/pianosound.mp3",
     },
     {
       img: "../assets/images/wind.svg",
+      imgWhite: "../assets/images/wind-white.svg",
       title: "wind",
       sound: "../assets/sounds/windsound.wav",
     },
     {
       img: "../assets/images/bird.svg",
+      imgWhite: "../assets/images/bird-white.svg",
       title: "chirping",
       sound: "../assets/sounds/chirping.wav",
     },
     {
       img: "../assets/images/bells.svg",
+      imgWhite: "../assets/images/bells-white.svg",
       title: "bells",
       sound: "../assets/sounds/bellssound.wav",
     },
@@ -57,13 +71,9 @@ const ButtonSounds = () => {
       newAudio.play();
 
       setAudioState((prevState) => ({ ...prevState, [sound]: newAudio }));
-      setColorPressed((prevColor) => ({ ...prevColor, [sound]: "#FFD6CB" }));
-      setPutBorder((prevBorder) => ({ ...prevBorder, [sound]: true }));
     } else {
       // Se l'audio è attualmente in riproduzione, mettilo in pausa
       audio.pause();
-      setColorPressed((prevColor) => ({ ...prevColor, [sound]: "#fff" }));
-      setPutBorder((prevBorder) => ({ ...prevBorder, [sound]: false }));
     }
   };
 
@@ -138,12 +148,17 @@ const ButtonSounds = () => {
               <button
                 className="rounded-full bg-white flex items-center justify-center w-24 h-24 "
                 style={{
-                  backgroundColor: colorPressed[item.sound],
-                  border: putBorder[item.sound] ? "3px solid #5EA9BE" : "none",
+                  background: hoveredButton === index ? "#5EA9BE" : "#FFFFFF",
                 }}
                 onClick={() => toggleSound(item.sound)}
+                onMouseEnter={() => handleMouseEnter(index)}
+                onMouseLeave={handleMouseLeave}
               >
-                <img src={item.img} alt="iconsounds-button" />
+                {hoveredButton === index ? (
+                  <img src={item.imgWhite} alt="iconsounds-button" />
+                ) : (
+                  <img src={item.img} alt="iconsounds-button" />
+                )}
               </button>
               {audioState[item.sound] && !audioState[item.sound].paused && (
                 <input
@@ -185,37 +200,44 @@ const ButtonSounds = () => {
             <button
               className="rounded-full bg-white flex items-center justify-center w-24 h-24 "
               style={{
-                backgroundColor: colorPressed[item.sound],
-                border: putBorder[item.sound] ? "3px solid #5EA9BE" : "none",
+                background: hoveredButton === index ? "#5EA9BE" : "#FFFFFF",
               }}
               onClick={() => toggleSound(item.sound)}
+              onMouseEnter={() => handleMouseEnter(index)}
+              onMouseLeave={handleMouseLeave}
             >
-              <img src={item.img} alt="iconsounds-button" />
+              {hoveredButton === index ? (
+                <img src={item.imgWhite} alt="iconsounds-button" />
+              ) : (
+                <img src={item.img} alt="iconsounds-button" />
+              )}
             </button>
-            {audioState[item.sound] && !audioState[item.sound].paused && (
-              <input
-                className="w-20 mt-3"
-                id="volume-control"
-                type="range"
-                min="0"
-                max="100"
-                defaultValue={volumeLevel[item.sound] * 100}
-                onChange={(event) => handleVolumeChange(event, item.sound)}
-                style={{
-                  background: `linear-gradient(
+            <div className="h-10 w-20">
+              {audioState[item.sound] && !audioState[item.sound].paused && (
+                <input
+                  className="w-20"
+                  id="volume-control"
+                  type="range"
+                  min="0"
+                  max="100"
+                  defaultValue={volumeLevel[item.sound] * 100}
+                  onChange={(event) => handleVolumeChange(event, item.sound)}
+                  style={{
+                    background: `linear-gradient(
               to right,
               #5ea9be 0%,
               #5ea9be ${volumeLevel[item.sound] * 100}%,
               rgba(94, 169, 190, 0.5) ${volumeLevel[item.sound] * 100}%,
               rgba(94, 169, 190, 0.5) 100%
             )`,
-                }}
-              />
-            )}
+                  }}
+                />
+              )}
+            </div>
 
-            <p className="text-textColor font-petrona xl:text-xl mt-2">
+            {/* <p className="text-textColor font-petrona xl:text-xl">
               {item.title}
-            </p>
+            </p> */}
           </div>
         ))
       )}

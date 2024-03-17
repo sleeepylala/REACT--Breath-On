@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 const ButtonMinutes = (props) => {
-  const [isHover, setIsHover] = useState(false);
   const [hoveredButton, setHoveredButton] = useState(null);
 
   const handleMouseEnter = (index) => {
