@@ -77,12 +77,12 @@ const buttonSoundsObj = [
 ];
 
 const buttonTemplateData1 = [
-  { img: focus, value: "focus" },
-  { img: sleep, value: "sleep" },
+  { img: focus, value: "focus", sound: bellsSound },
+  { img: sleep, value: "sleep", sound: wavesSound },
 ];
 const buttonTemplateData2 = [
-  { img: mind, value: "mind" },
-  { img: read, value: "read" },
+  { img: mind, value: "mind", sound: fireSound },
+  { img: read, value: "read", sound: birdSound },
 ];
 
 export { buttonSoundsObj, buttonTemplateData1, buttonTemplateData2 };

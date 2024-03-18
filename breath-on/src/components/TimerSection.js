@@ -5,12 +5,6 @@ import ButtonSounds from "./ButtonSounds";
 import ButtonMinutes from "./ButtonMinutes";
 import ButtonTimer from "./ButtonTimer";
 import TextSection from "./TextSection";
-import { buttonTemplateData1 } from "../assets/icons";
-import { buttonTemplateData2 } from "../assets/icons";
-import mindSound from "../assets/sounds/campfiresound.wav";
-import readSound from "../assets/sounds/chirping.wav";
-import sleepSound from "../assets/sounds/wavessound.wav";
-import focusSound from "../assets/sounds/bellssound.wav";
 
 const TimerSection = () => {
   // Stati del componente
@@ -94,23 +88,18 @@ const TimerSection = () => {
 
   const toggleMind = () => {
     setTime({ minutes: 10, seconds: 0 });
-    playSound(mindSound);
   };
+
   const toggleRead = () => {
     setTime({ minutes: 20, seconds: 0 });
-    playSound(readSound);
   };
+
   const toggleSleep = () => {
     setTime({ minutes: 30, seconds: 0 });
-    playSound(sleepSound);
   };
+
   const toggleFocus = () => {
     setTime({ minutes: 25, seconds: 0 });
-    playSound(focusSound);
-  };
-  const playSound = (sound) => {
-    const audio = new Audio(sound);
-    audio.play();
   };
 
   // Calcolo dei valori dei minuti e dei secondi
@@ -124,44 +113,13 @@ const TimerSection = () => {
 
   return (
     <>
-      <section className="section-timer border-2 border-red-900 flex flex-col  relative">
-        <div className="flex border-2 border-blue-900 justify-center items-center sm:space-x-10 space-x-20 xl:space-x-60">
-          {buttonTemplateData1.map((item, index) => (
-            <ButtonTemplate
-              key={index}
-              img={item.img}
-              onChange={item.onChange}
-              value={item.value}
-              onClick={item.onClick}
-              toggleFunction={
-                item.value === "sleep"
-                  ? toggleSleep
-                  : item.value === "focus"
-                  ? toggleFocus
-                  : null
-              }
-            />
-          ))}
-        </div>
-        <div className="flex justify-around xl:space-x-40 sm:space-x-16 ">
-          {buttonTemplateData2.map((item, index) => (
-            <ButtonTemplate
-              key={index}
-              img={item.img}
-              onChange={item.onChange}
-              value={item.value}
-              onClick={item.onClick}
-              toggleFunction={
-                item.value === "mind"
-                  ? toggleMind
-                  : item.value === "read"
-                  ? toggleRead
-                  : null
-              }
-            />
-          ))}
-        </div>
-
+      <section className="section-timer border-2 border-red-900 flex flex-col relative">
+        <ButtonTemplate
+          toggleMind={toggleMind}
+          toggleRead={toggleRead}
+          toggleSleep={toggleSleep}
+          toggleFocus={toggleFocus}
+        />
         <Timer
           secondsValue={secondsValue}
           minutesValue={minutesValue}
@@ -170,8 +128,7 @@ const TimerSection = () => {
           resetTimer={resetTimer}
           onResetTimerComplete={() => setResetTimer(false)}
         />
-
-        <div className="container-timerbutton border-2  border-orange-700 flex justify-center space-x-24 mt-56 xl:mt-80 sm:mt-96">
+        <div className="container-timerbutton border-2 border-orange-700 flex justify-center space-x-24 mt-56 xl:mt-80 sm:mt-96">
           <ButtonTimer
             img={isPlay ? "pause" : "play"}
             onChange={handleButtonClick}
