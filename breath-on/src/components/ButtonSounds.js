@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "react-multi-carousel/lib/styles.css";
 import Carousel from "react-multi-carousel";
 import { buttonSoundsObj } from "../assets/icons";
+import InputVolume from "./InputVolume";
 
 const ButtonSounds = () => {
   const [audioState, setAudioState] = useState({});
@@ -117,27 +118,9 @@ const ButtonSounds = () => {
                 )}
               </button>
               {audioState[item.sound] && !audioState[item.sound].paused && (
-                <input
-                  className="w-20 mt-3"
-                  id="volume-control"
-                  type="range"
-                  min="0"
-                  max="100"
-                  defaultValue={
-                    volumeLevel[item.sound] !== undefined
-                      ? volumeLevel[item.sound] * 100
-                      : 50
-                  }
+                <InputVolume
+                  value={volumeLevel[item.sound] * 100}
                   onChange={(event) => handleVolumeChange(event, item.sound)}
-                  style={{
-                    background: `linear-gradient(
-                  to right,
-                  #5ea9be 0%,
-                  #5ea9be ${volumeLevel[item.sound] * 100}%,
-                  rgba(94, 169, 190, 0.5) ${volumeLevel[item.sound] * 100}%,
-                  rgba(94, 169, 190, 0.5) 100%
-                )`,
-                  }}
                 />
               )}
             </div>
@@ -166,27 +149,12 @@ const ButtonSounds = () => {
             </button>
             <div className="h-10 w-20">
               {audioState[item.sound] && !audioState[item.sound].paused && (
-                <input
-                  className="w-20"
-                  id="volume-control"
-                  type="range"
-                  min="0"
-                  max="100"
-                  defaultValue={volumeLevel[item.sound] * 100}
+                <InputVolume
+                  value={volumeLevel[item.sound] * 100}
                   onChange={(event) => handleVolumeChange(event, item.sound)}
-                  style={{
-                    background: `linear-gradient(
-              to right,
-              #5ea9be 0%,
-              #5ea9be ${volumeLevel[item.sound] * 100}%,
-              rgba(94, 169, 190, 0.5) ${volumeLevel[item.sound] * 100}%,
-              rgba(94, 169, 190, 0.5) 100%
-            )`,
-                  }}
                 />
               )}
             </div>
-
             {/* <p className="text-textColor font-petrona xl:text-xl">
               {item.title}
             </p> */}

@@ -87,15 +87,15 @@ const TimerSection = () => {
   const addFifteenMin = () => setTime({ minutes: 15, seconds: 0 });
 
   const toggleMind = () => {
-    setTime({ minutes: 10, seconds: 0 });
-  };
-
-  const toggleRead = () => {
     setTime({ minutes: 20, seconds: 0 });
   };
 
-  const toggleSleep = () => {
+  const toggleRead = () => {
     setTime({ minutes: 30, seconds: 0 });
+  };
+
+  const toggleSleep = () => {
+    setTime({ minutes: 40, seconds: 0 });
   };
 
   const toggleFocus = () => {

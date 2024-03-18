@@ -31,6 +31,11 @@ import focus from "./images/focus.svg";
 import sleep from "./images/sleep.svg";
 import read from "./images/read.svg";
 
+import mindSound from "./soundTemplate/Mindtemplate.mp3";
+import focusSound from "./soundTemplate/Focustemplate.mp3";
+import sleepSound from "./soundTemplate/Sleeptemplate.mp3";
+import readSound from "./soundTemplate/Readtemplate.mp3";
+
 const buttonSoundsObj = [
   {
     img: fire,
@@ -77,12 +82,12 @@ const buttonSoundsObj = [
 ];
 
 const buttonTemplateData1 = [
-  { img: focus, value: "focus", sound: bellsSound },
-  { img: sleep, value: "sleep", sound: wavesSound },
+  { img: focus, value: "focus", sound: focusSound },
+  { img: sleep, value: "sleep", sound: sleepSound },
 ];
 const buttonTemplateData2 = [
-  { img: mind, value: "mind", sound: fireSound },
-  { img: read, value: "read", sound: birdSound },
+  { img: mind, value: "mind", sound: mindSound },
+  { img: read, value: "read", sound: readSound },
 ];
 
 export { buttonSoundsObj, buttonTemplateData1, buttonTemplateData2 };
