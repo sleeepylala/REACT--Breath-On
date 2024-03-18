@@ -51,6 +51,11 @@ main {
   .container-timerbutton {
     margin-top: 0;
   }
+  .button-template {
+    width: 90px;
+    height: 90px;
+    margin: 20px 0;
+  }
 }
 input[type="range"] {
   -webkit-appearance: none;
