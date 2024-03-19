@@ -5,6 +5,7 @@ import ButtonSounds from "./ButtonSounds";
 import ButtonMinutes from "./ButtonMinutes";
 import ButtonTimer from "./ButtonTimer";
 import TextSection from "./TextSection";
+import Alert from "./Alert";
 
 const TimerSection = () => {
   // Stati del componente
@@ -19,6 +20,7 @@ const TimerSection = () => {
   const [resetTimer, setResetTimer] = useState(false);
   const [loaderTime, setLoaderTime] = useState(3);
   const [isLoadingComplete, setIsLoadingComplete] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -68,8 +70,9 @@ const TimerSection = () => {
 
   // Funzione per gestire il clic del pulsante di riproduzione/pausa
   const handleButtonClick = () => {
-    // Se il timer è già in esecuzione o non è stato impostato alcun intervallo, non fare nulla
+    // Se il timer è già in esecuzione o non è stato impostato alcun intervallo, mostra l'alert
     if (!isPlay && time.minutes === 0 && time.seconds === 0) {
+      setShowAlert(true);
       return;
     }
     setIsPlay(!isPlay);
@@ -120,6 +123,7 @@ const TimerSection = () => {
           toggleSleep={toggleSleep}
           toggleFocus={toggleFocus}
         />
+
         <Timer
           secondsValue={secondsValue}
           minutesValue={minutesValue}
@@ -128,6 +132,7 @@ const TimerSection = () => {
           resetTimer={resetTimer}
           onResetTimerComplete={() => setResetTimer(false)}
         />
+        {showAlert && <Alert onClose={() => setShowAlert(false)} />}
         <div className="container-timerbutton border-2 border-orange-700 flex justify-center space-x-24 mt-56 xl:mt-80 sm:mt-96">
           <ButtonTimer
             img={isPlay ? "pause" : "play"}
@@ -142,6 +147,7 @@ const TimerSection = () => {
             addFifteenMin={addFifteenMin}
           />
         </div>
+
         <ButtonSounds />
       </section>
     </>
