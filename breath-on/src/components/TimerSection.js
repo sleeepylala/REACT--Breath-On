@@ -21,6 +21,7 @@ const TimerSection = () => {
   const [loaderTime, setLoaderTime] = useState(3);
   const [isLoadingComplete, setIsLoadingComplete] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -73,6 +74,7 @@ const TimerSection = () => {
     // Se il timer è già in esecuzione o non è stato impostato alcun intervallo, mostra l'alert
     if (!isPlay && time.minutes === 0 && time.seconds === 0) {
       setShowAlert(true);
+      setShowOverlay(true);
       return;
     }
     setIsPlay(!isPlay);
@@ -105,6 +107,18 @@ const TimerSection = () => {
     setTime({ minutes: 25, seconds: 0 });
   };
 
+  useEffect(() => {
+    if (showAlert) {
+      document.body.style.overflow = "hidden"; // Blocca lo scroll quando l'alert è aperto
+    } else {
+      document.body.style.overflow = "auto"; // Ripristina lo scroll quando l'alert è chiuso
+    }
+
+    return () => {
+      document.body.style.overflow = "auto"; // Assicura che lo scroll venga ripristinato quando il componente viene smontato
+    };
+  }, [showAlert]);
+
   // Calcolo dei valori dei minuti e dei secondi
   const minutesValue = Math.floor((initialTotalSeconds - elapsedSeconds) / 60);
   const secondsValue = (initialTotalSeconds - elapsedSeconds) % 60;
@@ -132,7 +146,15 @@ const TimerSection = () => {
           resetTimer={resetTimer}
           onResetTimerComplete={() => setResetTimer(false)}
         />
-        {showAlert && <Alert onClose={() => setShowAlert(false)} />}
+        {showOverlay && <div className="overlay" />}
+        {showAlert && (
+          <Alert
+            onClose={() => {
+              setShowAlert(false);
+              setShowOverlay(false);
+            }}
+          />
+        )}
         <div className="container-timerbutton border-2 border-orange-700 flex justify-center space-x-24 mt-56 xl:mt-80 sm:mt-96">
           <ButtonTimer
             img={isPlay ? "pause" : "play"}

@@ -77,3 +77,14 @@ input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   margin-top: -3px;
 }
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px); /* Applica un effetto di sfocatura */
+  z-index: 40; /* Assicura che l'overlay sia sopra tutti gli altri elementi, tranne l'alert */
+}
