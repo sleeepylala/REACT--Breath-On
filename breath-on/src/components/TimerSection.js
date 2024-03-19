@@ -6,6 +6,7 @@ import ButtonMinutes from "./ButtonMinutes";
 import ButtonTimer from "./ButtonTimer";
 import TextSection from "./TextSection";
 import Alert from "./Alert";
+import Background from "../assets/images/sfondo.svg";
 
 const TimerSection = () => {
   // Stati del componente
@@ -107,6 +108,7 @@ const TimerSection = () => {
     setTime({ minutes: 25, seconds: 0 });
   };
 
+  //blocco lo scroll quando c'è l'alert
   useEffect(() => {
     if (showAlert) {
       document.body.style.overflow = "hidden"; // Blocca lo scroll quando l'alert è aperto
@@ -130,7 +132,15 @@ const TimerSection = () => {
 
   return (
     <>
-      <section className="section-timer border-2 border-red-900 flex flex-col relative">
+      <section
+        className="section-timer border-2 border-red-900 flex flex-col relative"
+        style={{
+          backgroundImage: `url(${Background})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPositionY: "40px",
+        }}
+      >
         <ButtonTemplate
           toggleMind={toggleMind}
           toggleRead={toggleRead}
