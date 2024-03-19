@@ -137,8 +137,7 @@ const TimerSection = () => {
         style={{
           backgroundImage: `url(${Background})`,
           backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPositionY: "40px",
+          backgroundPosition: "top",
         }}
       >
         <ButtonTemplate
