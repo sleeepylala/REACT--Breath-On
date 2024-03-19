@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TbMoonFilled } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/logo.svg";
@@ -11,8 +11,15 @@ const Navbar = () => {
   const { darkMode, setDarkMode } = useTheme();
 
   const switchDarkMode = () => {
-    setDarkMode((prev) => !prev);
+    setDarkMode((prevDarkMode) => !prevDarkMode);
   };
+
+  useEffect(() => {
+    document.body.style.backgroundColor = darkMode ? "#3C8499" : "#FFDDD3";
+    return () => {
+      document.body.style.backgroundColor = "";
+    };
+  }, [darkMode]);
 
   return (
     <nav

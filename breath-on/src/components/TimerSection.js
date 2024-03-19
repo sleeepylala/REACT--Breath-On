@@ -7,8 +7,11 @@ import ButtonTimer from "./ButtonTimer";
 import TextSection from "./TextSection";
 import Alert from "./Alert";
 import Background from "../assets/images/sfondo.svg";
+import BackgroundDark from "../assets/images/sfondodark.svg";
+import { useTheme } from "../context/ThemeContext";
 
 const TimerSection = () => {
+  const { darkMode } = useTheme();
   // Stati del componente
   const [isPlay, setIsPlay] = useState(false);
   const [time, setTime] = useState({
@@ -135,7 +138,9 @@ const TimerSection = () => {
       <section
         className="section-timer border-2 border-red-900 flex flex-col relative"
         style={{
-          backgroundImage: `url(${Background})`,
+          backgroundImage: darkMode
+            ? `url(${BackgroundDark})`
+            : `url(${Background})`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "top",
         }}

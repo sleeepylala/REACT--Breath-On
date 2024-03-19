@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { useTheme } from "../context/ThemeContext";
 
 const Timer = (props) => {
   const [percentage, setPercentage] = useState(100); // Inizia con la barra piena
+  const { darkMode } = useTheme();
 
   // Effetto per calcolare e aggiornare la percentuale di completamento
   useEffect(() => {
@@ -50,9 +52,9 @@ const Timer = (props) => {
             strokeLinecap: "round",
             textSize: "16px",
             pathTransitionDuration: 0.1,
-            pathColor: "#5EA9BE",
+            pathColor: darkMode ? "#FFDDD3" : "#5EA9BE",
             textColor: "#222222",
-            trailColor: "#d6d6d6",
+            trailColor: "none",
             backgroundColor: "#5EA9BE",
           })}
         />
