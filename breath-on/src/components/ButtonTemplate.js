@@ -14,6 +14,20 @@ const ButtonTemplate = ({
   const [audioState, setAudioState] = useState({});
   const [volumeLevel, setVolumeLevel] = useState({});
 
+  useEffect(() => {
+    // Funzione per fermare tutti gli audio attivi
+    const stopAllSounds = () => {
+      Object.values(audioState).forEach((audio) => {
+        audio.pause();
+      });
+    };
+
+    return () => {
+      stopAllSounds();
+      console.log("stop");
+    };
+  }, [audioState]);
+
   const handleMouseEnterGroup1 = (index) => {
     setHoveredButtonGroup1(index);
   };
@@ -31,14 +45,22 @@ const ButtonTemplate = ({
   };
 
   const toggleSound = (sound) => {
+    Object.keys(audioState).forEach((key) => {
+      if (key !== sound) {
+        audioState[key].pause();
+      }
+      console.log("SOUND: " + sound);
+      console.log("PREV: " + key);
+    });
+
+    console.log(Object.keys(audioState));
+
     const audio = audioState[sound];
     if (!audio || audio.paused) {
       const newAudio = new Audio(sound);
       newAudio.loop = true;
       newAudio.volume = 0.5;
-
       newAudio.play();
-
       setAudioState((prevState) => ({ ...prevState, [sound]: newAudio }));
     } else {
       audio.pause();
@@ -61,7 +83,7 @@ const ButtonTemplate = ({
           <div key={index} className="relative">
             <div className="flex justify-center items-center flex-col ">
               <button
-                className="button-template border rounded-full bg-white flex justify-center items-center h-28 w-28 shadow-md"
+                className="button-template border rounded-full bg-white flex justify-center items-center h-28 w-28 shadow-md sm:sp"
                 style={{
                   backgroundColor:
                     hoveredButtonGroup1 === index ? "#5EA9BE" : "#fff",
@@ -88,17 +110,19 @@ const ButtonTemplate = ({
                   <img src={item.img} alt="icon-button" />
                 )}
               </button>
-              {audioState[item.sound] && !audioState[item.sound].paused && (
-                <InputVolume
-                  value={
-                    (audioState[item.sound].volume *
-                      100 *
-                      (volumeLevel[item.sound] || 0.8)) /
-                    0.8
-                  }
-                  onChange={(event) => handleVolumeChange(event, item.sound)}
-                />
-              )}
+              <div className="h-10 w-20">
+                {audioState[item.sound] && !audioState[item.sound].paused && (
+                  <InputVolume
+                    value={
+                      (audioState[item.sound].volume *
+                        100 *
+                        (volumeLevel[item.sound] || 0.8)) /
+                      0.8
+                    }
+                    onChange={(event) => handleVolumeChange(event, item.sound)}
+                  />
+                )}
+              </div>
             </div>
           </div>
         ))}
@@ -135,17 +159,19 @@ const ButtonTemplate = ({
                   <img src={item.img} alt="icon-button" />
                 )}
               </button>
-              {audioState[item.sound] && !audioState[item.sound].paused && (
-                <InputVolume
-                  value={
-                    (audioState[item.sound].volume *
-                      100 *
-                      (volumeLevel[item.sound] || 0.8)) /
-                    0.8
-                  }
-                  onChange={(event) => handleVolumeChange(event, item.sound)}
-                />
-              )}
+              <div className="h-10 w-20">
+                {audioState[item.sound] && !audioState[item.sound].paused && (
+                  <InputVolume
+                    value={
+                      (audioState[item.sound].volume *
+                        100 *
+                        (volumeLevel[item.sound] || 0.8)) /
+                      0.8
+                    }
+                    onChange={(event) => handleVolumeChange(event, item.sound)}
+                  />
+                )}
+              </div>
             </div>
           </div>
         ))}

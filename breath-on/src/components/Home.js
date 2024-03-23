@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaArrowRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import hero from "../assets/images/hero-img.svg";
@@ -7,6 +7,8 @@ import { useTheme } from "../context/ThemeContext";
 
 const Home = () => {
   const { darkMode } = useTheme();
+
+  useEffect(() => {}, []);
 
   return (
     <section className="py-16">

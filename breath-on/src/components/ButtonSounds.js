@@ -1,14 +1,72 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "react-multi-carousel/lib/styles.css";
 import Carousel from "react-multi-carousel";
 import { buttonSoundsObj } from "../assets/icons";
 import InputVolume from "./InputVolume";
 
 const ButtonSounds = () => {
+  const [audioPaths, setAudioPaths] = useState({});
   const [audioState, setAudioState] = useState({});
   const [volumeLevel, setVolumeLevel] = useState({});
-  const [isMobile, setIsMobile] = useState(false); //stato per vedere se è mobile e mettere il carosello
+  const [isMobile, setIsMobile] = useState(false);
   const [hoveredButton, setHoveredButton] = useState(null);
+
+  const audioRefs = useRef({});
+
+  useEffect(() => {
+    return () => {
+      stopAllSounds();
+    };
+  }, []);
+
+  useEffect(() => {
+    const initialVolumeLevels = buttonSoundsObj.reduce((acc, curr) => {
+      acc[curr.sound] = 0.8;
+      return acc;
+    }, {});
+    setVolumeLevel(initialVolumeLevels);
+    const paths = {};
+    buttonSoundsObj.forEach((sound) => {
+      paths[sound.sound] = sound.sound;
+    });
+    setAudioPaths(paths);
+  }, []);
+
+  const playSound = (sound) => {
+    const audio = new Audio(sound);
+    audio.loop = true;
+    audio
+      .play()
+      .catch((error) => console.error("Error playing the sound:", error));
+    return audio;
+  };
+  const stopSound = (audio) => {
+    audio.pause();
+    audio.currentTime = 0;
+  };
+  const stopAllSounds = () => {
+    Object.values(audioRefs.current).forEach(stopSound);
+  };
+
+  const toggleSound = (sound) => {
+    const audio = audioRefs.current[sound];
+    if (!audio || audio.paused) {
+      const newAudio = playSound(audioPaths[sound]);
+      setAudioState((prevState) => ({ ...prevState, [sound]: newAudio }));
+      audioRefs.current[sound] = newAudio;
+    } else {
+      stopSound(audio);
+    }
+  };
+
+  const handleVolumeChange = (event, sound) => {
+    const volume = event.target.value / 100;
+    const audio = audioState[sound];
+    if (audio) {
+      audio.volume = volume;
+      setVolumeLevel((prevVolume) => ({ ...prevVolume, [sound]: volume }));
+    }
+  };
 
   const handleMouseEnter = (index) => {
     setHoveredButton(index);
@@ -18,53 +76,15 @@ const ButtonSounds = () => {
     setHoveredButton(null);
   };
 
-  const toggleSound = (sound) => {
-    const audio = audioState[sound];
-    if (!audio || audio.paused) {
-      // Se l'audio non è stato creato o è in pausa, crealo e avvialo
-      const newAudio = new Audio(sound);
-      newAudio.loop = true;
-
-      newAudio.play();
-
-      setAudioState((prevState) => ({ ...prevState, [sound]: newAudio }));
-    } else {
-      // Se l'audio è attualmente in riproduzione, mettilo in pausa
-      audio.pause();
-    }
-  };
-
-  // Funzione per gestire il cambiamento del volume.
-  const handleVolumeChange = (event, index) => {
-    const volume = event.target.value / 100;
-    const audio = audioState[index];
-    if (audio) {
-      audio.volume = volume;
-      setVolumeLevel((prevVolume) => ({ ...prevVolume, [index]: volume }));
-    }
-  };
-
-  // Hook di effetto per gestire il ridimensionamento della finestra per il carosello
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 640);
     };
-
     handleResize();
-
-    window.addEventListener("resize", handleResize); // Aggiunge un listener per il ridimensionamento della finestra
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener("resize", handleResize); // Pulisce il listener al momento dello smontaggio del componente
+      window.removeEventListener("resize", handleResize);
     };
-  }, []);
-
-  // Inizializzazione dei livelli di volume
-  useEffect(() => {
-    const initialVolumeLevels = buttonSoundsObj.reduce((acc, curr) => {
-      acc[curr.sound] = 0.8; // Imposta il volume predefinito
-      return acc;
-    }, {});
-    setVolumeLevel(initialVolumeLevels);
   }, []);
 
   return (
@@ -137,7 +157,9 @@ const ButtonSounds = () => {
               style={{
                 background: hoveredButton === index ? "#5EA9BE" : "#FFFFFF",
               }}
-              onClick={() => toggleSound(item.sound)}
+              onClick={() => {
+                toggleSound(item.sound);
+              }}
               onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={handleMouseLeave}
             >

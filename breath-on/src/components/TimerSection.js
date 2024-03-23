@@ -136,7 +136,7 @@ const TimerSection = () => {
   return (
     <>
       <section
-        className="section-timer border-2 border-red-900 flex flex-col relative"
+        className="section-timer border-4 border-green-900 flex flex-col relative"
         style={{
           backgroundImage: darkMode
             ? `url(${BackgroundDark})`
@@ -169,7 +169,7 @@ const TimerSection = () => {
             }}
           />
         )}
-        <div className="container-timerbutton border-2 border-orange-700 flex justify-center space-x-24 mt-56 xl:mt-80 sm:mt-96">
+        <div className="container-timerbutton border-2 border-orange-700 flex justify-center space-x-24 mt-20 xl:mt-60 sm:mt-80">
           <ButtonTimer
             img={isPlay ? "pause" : "play"}
             onChange={handleButtonClick}
