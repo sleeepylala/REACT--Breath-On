@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <section className="py-16 section-home">
       <div
-        className={`grid grid-cols-1 sm:grid-cols-12 border-2 ${
+        className={`grid grid-cols-1 sm:grid-cols-12 ${
           darkMode ? "bg-darkPrimary" : "bg-secondary"
         }`}
       >

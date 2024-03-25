@@ -16,8 +16,8 @@ const ButtonTemplate = ({
   const [audioState, setAudioState] = useState({});
   const [volumeLevel, setVolumeLevel] = useState({});
 
+  // Effetto per fermare tutti gli audio attivi alla rimozione del componente
   useEffect(() => {
-    // Funzione per fermare tutti gli audio attivi
     const stopAllSounds = () => {
       Object.values(audioState).forEach((audio) => {
         audio.pause();
@@ -46,16 +46,13 @@ const ButtonTemplate = ({
     setHoveredButtonGroup2(null);
   };
 
+  // Funzione per attivare/disattivare un suono
   const toggleSound = (sound) => {
     Object.keys(audioState).forEach((key) => {
       if (key !== sound) {
         audioState[key].pause();
       }
-      console.log("SOUND: " + sound);
-      console.log("PREV: " + key);
     });
-
-    console.log(Object.keys(audioState));
 
     const audio = audioState[sound];
     if (!audio || audio.paused) {
@@ -80,7 +77,7 @@ const ButtonTemplate = ({
   };
   return (
     <>
-      <div className="flex border-2 border-blue-900 justify-center items-center sm:space-x-10 space-x-20 xl:space-x-60">
+      <div className="flex  justify-center items-center sm:space-x-10 space-x-20 xl:space-x-60">
         {buttonTemplateData1.map((item, index) => (
           <div key={index} className="relative">
             <div className="flex justify-center items-center flex-col ">

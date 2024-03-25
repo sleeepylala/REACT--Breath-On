@@ -13,22 +13,24 @@ import { useTheme } from "../context/ThemeContext";
 
 const TimerSection = () => {
   const { darkMode } = useTheme();
+
   // Stati del componente
   const [isPlay, setIsPlay] = useState(false);
   const [time, setTime] = useState({
     minutes: 0,
     seconds: 0,
   });
-  const [initialTotalSeconds, setInitialTotalSeconds] = useState(0);
-  const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const [initialTotalSeconds, setInitialTotalSeconds] = useState(0); // Stato per il tempo totale iniziale
+  const [elapsedSeconds, setElapsedSeconds] = useState(0); // Stato per i secondi trascorsi
   const [isFinished, setIsFinished] = useState(false);
   const [resetTimer, setResetTimer] = useState(false);
-  const [loaderTime, setLoaderTime] = useState(3);
+  const [loaderTime, setLoaderTime] = useState(3); // Tempo di caricamento iniziale
   const [isLoadingComplete, setIsLoadingComplete] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
   const [playedFinishSound, setPlayedFinishSound] = useState(false); // Stato per controllare se il suono di fine timer è già stato riprodotto
 
+  // Effetto per il caricamento iniziale
   useEffect(() => {
     const timer = setInterval(() => {
       setLoaderTime((prevLoad) => {
@@ -55,7 +57,7 @@ const TimerSection = () => {
         setElapsedSeconds((prevElapsedSeconds) => prevElapsedSeconds + 1);
       }, 1000);
     }
-    return () => clearInterval(interval); // Pulisce l'intervallo quando il componente viene smontato
+    return () => clearInterval(interval);
   }, [isPlay]);
 
   // Effetto per gestire il reset del timer
@@ -68,7 +70,6 @@ const TimerSection = () => {
   }, [time]);
 
   // Effetto per controllare se il timer è terminato
-
   useEffect(() => {
     if (initialTotalSeconds - elapsedSeconds <= 0 && isPlay) {
       setIsFinished(true);
@@ -89,7 +90,8 @@ const TimerSection = () => {
     }
     setIsPlay(!isPlay);
   };
-  // Effetto per gestire la riproduzione del suono quando richiesto dall'utente
+
+  // Effetto per la riproduzione del suono di fine timer
   useEffect(() => {
     if (playedFinishSound) {
       const finishTimerSound = new Audio(FinishTimer);
@@ -104,25 +106,14 @@ const TimerSection = () => {
     setResetTimer(true);
   };
 
+  // Funzioni per impostare la durata del timer in base alla categoria selezionata
   const addFiveMin = () => setTime({ minutes: 5, seconds: 0 });
   const addTenMin = () => setTime({ minutes: 10, seconds: 0 });
   const addFifteenMin = () => setTime({ minutes: 15, seconds: 0 });
-
-  const toggleMind = () => {
-    setTime({ minutes: 20, seconds: 0 });
-  };
-
-  const toggleRead = () => {
-    setTime({ minutes: 30, seconds: 0 });
-  };
-
-  const toggleSleep = () => {
-    setTime({ minutes: 40, seconds: 0 });
-  };
-
-  const toggleFocus = () => {
-    setTime({ minutes: 25, seconds: 0 });
-  };
+  const toggleMind = () => setTime({ minutes: 20, seconds: 0 });
+  const toggleRead = () => setTime({ minutes: 30, seconds: 0 });
+  const toggleSleep = () => setTime({ minutes: 40, seconds: 0 });
+  const toggleFocus = () => setTime({ minutes: 25, seconds: 0 });
 
   //blocco lo scroll quando c'è l'alert
   useEffect(() => {
@@ -149,7 +140,7 @@ const TimerSection = () => {
   return (
     <>
       <section
-        className="section-timer border-4 border-green-900 flex flex-col relative"
+        className="section-timer  flex flex-col relative"
         style={{
           backgroundImage: darkMode
             ? `url(${BackgroundDark})`
@@ -182,7 +173,7 @@ const TimerSection = () => {
             }}
           />
         )}
-        <div className="container-timerbutton border-2 border-orange-700 flex justify-center space-x-24 mt-20 xl:mt-60 sm:mt-80">
+        <div className="container-timerbutton  flex justify-center space-x-24 mt-20 xl:mt-60 sm:mt-80">
           <ButtonTimer
             img={isPlay ? "pause" : "play"}
             onChange={handleButtonClick}

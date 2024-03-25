@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { TbMoonFilled } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/logo.svg";
@@ -32,9 +32,9 @@ const Navbar = () => {
       <div className="flex container m-auto  justify-between items-center py-7 px-5">
         <Link to="/">
           {darkMode ? (
-            <img src={logoDark} className="logo-dark" />
+            <img src={logoDark} className="logo-dark" alt="logo-dark" />
           ) : (
-            <img src={logo} className="logo" />
+            <img src={logo} className="logo" alt="logo" />
           )}
         </Link>
         <button className="cursor-pointer" onClick={switchDarkMode}>

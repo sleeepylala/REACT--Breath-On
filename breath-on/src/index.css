@@ -44,8 +44,6 @@ main {
   min-width: 0 !important;
   vertical-align: middle;
   margin: 0 auto;
-
-  border: 2px solid black;
   position: absolute;
   top: 345px !important;
 }
