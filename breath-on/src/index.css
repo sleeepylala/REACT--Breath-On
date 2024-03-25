@@ -38,6 +38,9 @@ main {
 .progress-bar .CircularProgressbar-path {
   stroke-width: 3px; /* Imposta lo spessore desiderato */
 }
+img {
+  pointer-events: none;
+}
 
 .progress-bar {
   width: auto !important;
