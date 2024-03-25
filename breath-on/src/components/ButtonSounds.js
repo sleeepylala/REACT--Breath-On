@@ -16,12 +16,14 @@ const ButtonSounds = () => {
 
   const audioRefs = useRef({});
 
+  // Effetto per il cleanup alla rimozione del componente
   useEffect(() => {
     return () => {
       stopAllSounds();
     };
   }, []);
 
+  // Effetto per l'inizializzazione degli stati
   useEffect(() => {
     const initialVolumeLevels = buttonSoundsObj.reduce((acc, curr) => {
       acc[curr.sound] = 0.8;
@@ -35,6 +37,7 @@ const ButtonSounds = () => {
     setAudioPaths(paths);
   }, []);
 
+  // Funzione per riprodurre un suono
   const playSound = (sound) => {
     const audio = new Audio(sound);
     audio.loop = true;
@@ -43,14 +46,17 @@ const ButtonSounds = () => {
       .catch((error) => console.error("Error playing the sound:", error));
     return audio;
   };
+  // Funzione per fermare un suono
   const stopSound = (audio) => {
     audio.pause();
     audio.currentTime = 0;
   };
+  // Funzione per fermare tutti i suoni
   const stopAllSounds = () => {
     Object.values(audioRefs.current).forEach(stopSound);
   };
 
+  // Funzione per attivare/disattivare un suono
   const toggleSound = (sound) => {
     const audio = audioRefs.current[sound];
     if (!audio || audio.paused) {
@@ -62,6 +68,7 @@ const ButtonSounds = () => {
     }
   };
 
+  // Funzione per gestire il cambio del volume
   const handleVolumeChange = (event, sound) => {
     const volume = event.target.value / 100;
     const audio = audioState[sound];
@@ -79,6 +86,7 @@ const ButtonSounds = () => {
     setHoveredButton(null);
   };
 
+  // Effetto per rilevare se si sta utilizzando un dispositivo mobile
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 640);
@@ -91,7 +99,7 @@ const ButtonSounds = () => {
   }, []);
 
   return (
-    <div className="container-sounds border-3 border-black items-center justify-around sm:grid sm:grid-cols-3 md:grid-cols-4 lg:flex lg:flex-row">
+    <div className="container-sounds  items-center justify-around sm:grid sm:grid-cols-3 md:grid-cols-4 lg:flex lg:flex-row">
       {isMobile ? (
         <Carousel
           additionalTransfrom={0}
@@ -190,9 +198,6 @@ const ButtonSounds = () => {
                 />
               )}
             </div>
-            {/* <p className="text-textColor font-petrona xl:text-xl">
-              {item.title}
-            </p> */}
           </div>
         ))
       )}

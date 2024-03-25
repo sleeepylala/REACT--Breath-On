@@ -1,4 +1,3 @@
-// ButtonTimer.jsx
 import React from "react";
 import playImage from "../assets/images/play.svg";
 import pauseImage from "../assets/images/pause.svg";
