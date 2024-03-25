@@ -2,13 +2,23 @@ import React from "react";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
+import MoonLoading from "../assets/images/moon loading.svg";
+import SunLoading from "../assets/images/sun loading.svg";
 
 const TextSection = () => {
   const { darkMode } = useTheme();
   return (
     <div className=" h-screen flex justify-center items-center">
+      <div className="absolute inset-0 flex justify-center items-center z-0">
+        {darkMode ? (
+          <img src={MoonLoading} className="moon-loading" alt="Moon loading" />
+        ) : (
+          <img src={SunLoading} className="sun-loading" alt="Sun loading" />
+        )}
+      </div>
+
       <section
-        className={`py-20 w-full ${
+        className={`py-8 md:py-20 w-full absolute top-1/2 transform -translate-y-1/2 flex justify-center items-center z-10 ${
           darkMode ? "bg-darkSecondary" : "bg-[#FFD6CB]"
         }`}
       >

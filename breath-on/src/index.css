@@ -31,6 +31,7 @@ main {
   margin-left: auto;
   margin-right: auto; */
 }
+
 .progress-bar .CircularProgressbar-path {
   stroke-width: 3px; /* Imposta lo spessore desiderato */
 }
@@ -101,4 +102,66 @@ input[type="range"]::-webkit-slider-thumb {
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(5px); /* Applica un effetto di sfocatura */
   z-index: 40; /* Assicura che l'overlay sia sopra tutti gli altri elementi, tranne l'alert */
+}
+
+/* animazione della luna */
+
+.moon-loading {
+  -webkit-animation: spin-counter 5s linear infinite;
+  -moz-animation: spin-counter 5s linear infinite;
+  animation: spin-counter 5s linear infinite;
+}
+
+@-webkit-keyframes spin-counter {
+  0% {
+    -webkit-transform: rotate(0deg); /* Parte dall'inizio */
+  }
+  100% {
+    -webkit-transform: rotate(
+      180deg
+    ); /* Ruota di 180 gradi in senso antiorario */
+  }
+}
+@-moz-keyframes spin-counter {
+  0% {
+    -webkit-transform: rotate(0deg); /* Parte dall'inizio */
+  }
+  100% {
+    -webkit-transform: rotate(
+      180deg
+    ); /* Ruota di 180 gradi in senso antiorario */
+  }
+}
+@keyframes spin-counter {
+  0% {
+    -webkit-transform: rotate(0deg); /* Parte dall'inizio */
+  }
+  100% {
+    -webkit-transform: rotate(
+      180deg
+    ); /* Ruota di 180 gradi in senso antiorario */
+  }
+}
+
+/* animazione del sole */
+.sun-loading {
+  -webkit-animation: spin 5s linear infinite;
+  -moz-animation: spin 5s linear infinite;
+  animation: spin 5s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(180deg);
+  }
+}
+@-moz-keyframes spin {
+  100% {
+    -webkit-transform: rotate(180deg);
+  }
+}
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(180deg);
+  }
 }

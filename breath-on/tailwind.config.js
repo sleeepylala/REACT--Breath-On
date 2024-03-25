@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        outline: "0 0 0 10px rgba(255, 255, 255, 0.5)", // Modifica i valori a seconda dell'effetto desiderato
+      },
       colors: {
         // Definisci i colori per la modalità light
         primary: "#5EA9BE",
