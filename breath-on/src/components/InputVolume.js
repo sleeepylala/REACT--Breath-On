@@ -9,6 +9,15 @@ const InputVolume = ({ value, onChange }) => {
     setIsMuted(value === 0);
   }, [value]);
 
+  // Calcolo del gradiente per lo slider del volume
+  const volumeGradient = `linear-gradient(
+    to right,
+    #5ea9be 0%,
+    #5ea9be ${value}%,
+    rgba(94, 169, 190, 0.5) ${value}%,
+    rgba(94, 169, 190, 0.5) 100%
+  )`;
+
   return (
     <div>
       <input
@@ -18,15 +27,7 @@ const InputVolume = ({ value, onChange }) => {
         max="100"
         value={value}
         onChange={onChange}
-        style={{
-          background: `linear-gradient(
-          to right,
-          #5ea9be 0%,
-          #5ea9be ${value}%,
-          rgba(94, 169, 190, 0.5) ${value}%,
-          rgba(94, 169, 190, 0.5) 100%
-        )`,
-        }}
+        style={{ background: volumeGradient }}
       />
 
       {isMuted && <FaVolumeMute className="text-primary w-20 h-5" />}

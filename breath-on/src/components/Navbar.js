@@ -25,11 +25,11 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`flex border-gray-500 border-opacity-50 border-2 top-0 left-0 right-0 ${
+      className={`flex top-0 left-0 right-0 ${
         darkMode ? "bg-darkSecondary" : "bg-[#FFD6CB]"
       }`}
     >
-      <div className="flex container m-auto border-2 border-black justify-between items-center py-7 px-5">
+      <div className="flex container m-auto  justify-between items-center py-7 px-5">
         <Link to="/">
           {darkMode ? (
             <img src={logoDark} className="logo-dark" />

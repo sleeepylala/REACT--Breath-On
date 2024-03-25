@@ -12,7 +12,7 @@ const Home = () => {
     <section className="py-16 section-home">
       <div
         className={`grid grid-cols-1 sm:grid-cols-12 border-2 ${
-          darkMode ? "border-blue-900 bg-darkPrimary" : "bg-secondary"
+          darkMode ? "bg-darkPrimary" : "bg-secondary"
         }`}
       >
         <div className="col-span-6 flex flex-col justify-center items-center">
