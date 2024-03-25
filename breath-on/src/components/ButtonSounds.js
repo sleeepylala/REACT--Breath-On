@@ -3,8 +3,11 @@ import "react-multi-carousel/lib/styles.css";
 import Carousel from "react-multi-carousel";
 import { buttonSoundsObj } from "../assets/icons";
 import InputVolume from "./InputVolume";
+import { useTheme } from "../context/ThemeContext";
 
 const ButtonSounds = () => {
+  const { darkMode } = useTheme();
+
   const [audioPaths, setAudioPaths] = useState({});
   const [audioState, setAudioState] = useState({});
   const [volumeLevel, setVolumeLevel] = useState({});
@@ -125,7 +128,12 @@ const ButtonSounds = () => {
               <button
                 className="rounded-full bg-white flex items-center justify-center w-24 h-24 shadow-md"
                 style={{
-                  background: hoveredButton === index ? "#5EA9BE" : "#FFFFFF",
+                  background:
+                    hoveredButton === index
+                      ? "#5EA9BE"
+                      : darkMode
+                      ? "#FFDDD3"
+                      : "#FFFFFF",
                 }}
                 onClick={() => toggleSound(item.sound)}
                 onMouseEnter={() => handleMouseEnter(index)}
@@ -155,7 +163,12 @@ const ButtonSounds = () => {
             <button
               className="rounded-full bg-white flex items-center justify-center w-24 h-24 shadow-md"
               style={{
-                background: hoveredButton === index ? "#5EA9BE" : "#FFFFFF",
+                background:
+                  hoveredButton === index
+                    ? "#5EA9BE"
+                    : darkMode
+                    ? "#FFDDD3"
+                    : "#FFFFFF",
               }}
               onClick={() => {
                 toggleSound(item.sound);

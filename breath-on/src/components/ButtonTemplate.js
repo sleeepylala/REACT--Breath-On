@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { buttonTemplateData1, buttonTemplateData2 } from "../assets/icons";
 import InputVolume from "./InputVolume";
+import { useTheme } from "../context/ThemeContext";
 
 const ButtonTemplate = ({
   toggleMind,
@@ -8,6 +9,7 @@ const ButtonTemplate = ({
   toggleSleep,
   toggleFocus,
 }) => {
+  const { darkMode } = useTheme();
   const [hoveredButtonGroup1, setHoveredButtonGroup1] = useState(null);
   const [hoveredButtonGroup2, setHoveredButtonGroup2] = useState(null);
 
@@ -86,7 +88,11 @@ const ButtonTemplate = ({
                 className="button-template border rounded-full bg-white flex justify-center items-center h-28 w-28 shadow-md sm:sp"
                 style={{
                   backgroundColor:
-                    hoveredButtonGroup1 === index ? "#5EA9BE" : "#fff",
+                    hoveredButtonGroup1 === index
+                      ? "#5EA9BE"
+                      : darkMode
+                      ? "#FFDDD3"
+                      : "#FFFFFF",
                   transition: "background-color 0.8s ease, opacity 1s ease",
                 }}
                 onClick={() => {
@@ -135,7 +141,11 @@ const ButtonTemplate = ({
                 className="button-template border rounded-full bg-white flex justify-center items-center h-28 w-28 shadow-md"
                 style={{
                   backgroundColor:
-                    hoveredButtonGroup2 === index ? "#5EA9BE" : "#fff",
+                    hoveredButtonGroup2 === index
+                      ? "#5EA9BE"
+                      : darkMode
+                      ? "#FFDDD3"
+                      : "#FFFFFF",
                   transition: "background-color 0.8s ease, opacity 1s ease",
                 }}
                 onClick={() => {
