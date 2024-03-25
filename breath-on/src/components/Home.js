@@ -33,7 +33,7 @@ const Home = () => {
           </Link>
         </div>
 
-        <div className="col-span-6">
+        <div className="col-span-6 pt-10">
           <img src={darkMode ? heroDark : hero} alt="hero" />
         </div>
       </div>

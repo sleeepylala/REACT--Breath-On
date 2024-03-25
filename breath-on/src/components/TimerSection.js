@@ -29,6 +29,7 @@ const TimerSection = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
   const [playedFinishSound, setPlayedFinishSound] = useState(false); // Stato per controllare se il suono di fine timer è già stato riprodotto
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   // Effetto per il caricamento iniziale
   useEffect(() => {
@@ -128,6 +129,19 @@ const TimerSection = () => {
     };
   }, [showAlert]);
 
+  //effetto per vedere la grandezza schermo e togliere sfondo
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 640);
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   // Calcolo dei valori dei minuti e dei secondi
   const minutesValue = Math.floor((initialTotalSeconds - elapsedSeconds) / 60);
   const secondsValue = (initialTotalSeconds - elapsedSeconds) % 60;
@@ -142,9 +156,9 @@ const TimerSection = () => {
       <section
         className="section-timer  flex flex-col relative"
         style={{
-          backgroundImage: darkMode
-            ? `url(${BackgroundDark})`
-            : `url(${Background})`,
+          backgroundImage:
+            !isSmallScreen &&
+            (darkMode ? `url(${BackgroundDark})` : `url(${Background})`),
           backgroundRepeat: "no-repeat",
           backgroundPosition: "top",
         }}
