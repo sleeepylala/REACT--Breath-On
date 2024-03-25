@@ -178,3 +178,17 @@ input[type="range"]::-webkit-slider-thumb {
     -webkit-transform: rotate(180deg);
   }
 }
+/* Stile della barra di scorrimento */
+body::-webkit-scrollbar {
+  width: 10px; /* Larghezza della barra di scorrimento */
+}
+
+/* Stile del thumb (maniglia) della barra di scorrimento */
+body::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5); /* Colore del thumb */
+}
+
+/* Stile della traccia della barra di scorrimento */
+body::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0); /* Colore della traccia */
+}
