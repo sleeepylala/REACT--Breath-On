@@ -9,12 +9,11 @@ const Timer = (props) => {
 
   // Effetto per calcolare e aggiornare la percentuale di completamento
   useEffect(() => {
-    // Calcola il tempo totale in secondi e il tempo trascorso in secondi
+    // Calcola la percentuale di completamento in base al tempo trascorso e al tempo totale
     const totalTimeInSeconds = props.minutesValue * 60 + props.secondsValue;
     const elapsedTimeInSeconds =
       props.initialTotalSeconds -
       (props.minutesValue * 60 + props.secondsValue);
-    // Calcola la percentuale di completamento
     const newPercentage =
       ((props.initialTotalSeconds - elapsedTimeInSeconds) /
         props.initialTotalSeconds) *
@@ -25,8 +24,9 @@ const Timer = (props) => {
   // Effetto per gestire il reset del timer
   useEffect(() => {
     if (props.resetTimer) {
-      setPercentage(100); // Riempie di nuovo la barra
-      // Reimposta lo stato resetTimer a false dopo aver gestito il reset
+      // Riporta la barra al 100% al reset
+      setPercentage(100);
+      // Reimposta lo stato resetTimer a false dopo il reset
       props.onResetTimerComplete();
     }
   }, [props.resetTimer, props.onResetTimerComplete]);
