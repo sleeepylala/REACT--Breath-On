@@ -29,7 +29,11 @@ const Navbar = () => {
     >
       <div className="flex container m-auto border-2 border-black justify-between items-center py-7 px-5">
         <Link to="/">
-          {darkMode ? <img src={logoDark} /> : <img src={logo} />}
+          {darkMode ? (
+            <img src={logoDark} className="logo-dark" />
+          ) : (
+            <img src={logo} className="logo" />
+          )}
         </Link>
         <button className="cursor-pointer" onClick={switchDarkMode}>
           {darkMode ? (

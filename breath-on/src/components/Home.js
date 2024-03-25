@@ -11,7 +11,7 @@ const Home = () => {
   useEffect(() => {}, []);
 
   return (
-    <section className="py-16">
+    <section className="py-16 section-home">
       <div
         className={`grid grid-cols-1 sm:grid-cols-12 border-2 border-blue-900 ${
           darkMode ? "bg-darkPrimary" : "bg-secondary"

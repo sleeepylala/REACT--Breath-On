@@ -25,8 +25,7 @@ main {
   justify-content: space-between;
 }
 .content-wrapper {
-  padding-left: 40px;
-  padding-right: 40px;
+  padding: 30px 40px;
   /* margin: 50px 0;
   margin-left: auto;
   margin-right: auto; */
@@ -65,7 +64,7 @@ main {
     transform: none;
     vertical-align: middle;
     margin: 0 auto;
-    width: 300px !important;
+    width: 290px !important;
   }
   .container-timerbutton {
     margin-top: 0;
@@ -74,6 +73,15 @@ main {
     width: 90px;
     height: 90px;
     margin: 20px 0;
+  }
+  .logo {
+    width: 150px;
+  }
+  .logo-dark {
+    width: 150px;
+  }
+  .section-home {
+    padding: 0;
   }
 }
 input[type="range"] {
