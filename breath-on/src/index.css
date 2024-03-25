@@ -32,6 +32,10 @@ main {
   margin-right: auto; */
 }
 
+.luminous-section {
+  box-shadow: 0 0 100px 5px rgba(255, 255, 255, 0.5);
+}
+
 .progress-bar .CircularProgressbar-path {
   stroke-width: 3px; /* Imposta lo spessore desiderato */
 }

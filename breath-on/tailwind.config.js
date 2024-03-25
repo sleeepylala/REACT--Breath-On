@@ -13,7 +13,7 @@ module.exports = {
         // Definisci i colori per la modalità light
         primary: "#5EA9BE",
         secondary: "#FFDDD3",
-        textColor: "#222222",
+        textColor: "#36454F",
         // Definisci i colori per la modalità dark
         darkPrimary: "#3C8499",
         darkSecondary: "#5EA9BE",

@@ -34,7 +34,7 @@ const ButtonMinutes = (props) => {
                   ? "#FFFFFF"
                   : darkMode
                   ? "#FFFFFF"
-                  : "#222222",
+                  : "#36454F",
               borderColor: darkMode ? "#FFDDD3" : "#5EA9BE",
             }}
             onClick={item.onClick}

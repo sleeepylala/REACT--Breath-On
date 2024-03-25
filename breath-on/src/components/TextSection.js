@@ -20,7 +20,7 @@ const TextSection = () => {
       <section
         className={`py-8 md:py-20 w-full absolute top-1/2 transform -translate-y-1/2 flex justify-center items-center z-10 ${
           darkMode ? "bg-darkSecondary" : "bg-[#FFD6CB]"
-        }`}
+        } luminous-section`}
       >
         <motion.div
           className="flex flex-col items-center justify-center "
