@@ -10,10 +10,12 @@ import { useTheme } from "../context/ThemeContext";
 const Navbar = () => {
   const { darkMode, setDarkMode } = useTheme();
 
+  // Funzione per passare da darkMode a lightMode o viceversa
   const switchDarkMode = () => {
     setDarkMode((prevDarkMode) => !prevDarkMode);
   };
 
+  // Effetto per cambiare il colore dello sfondo del body in base al darkMode
   useEffect(() => {
     document.body.style.backgroundColor = darkMode ? "#3C8499" : "#FFDDD3";
     return () => {
