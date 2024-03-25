@@ -8,6 +8,7 @@ import TextSection from "./TextSection";
 import Alert from "./Alert";
 import Background from "../assets/images/sfondo.svg";
 import BackgroundDark from "../assets/images/sfondodark.svg";
+import FinishTimer from "../assets/sounds/timer-complete.mp3";
 import { useTheme } from "../context/ThemeContext";
 
 const TimerSection = () => {
@@ -26,6 +27,7 @@ const TimerSection = () => {
   const [isLoadingComplete, setIsLoadingComplete] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
+  const [playedFinishSound, setPlayedFinishSound] = useState(false); // Stato per controllare se il suono di fine timer è già stato riprodotto
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -62,16 +64,20 @@ const TimerSection = () => {
     setInitialTotalSeconds(totalSeconds);
     setElapsedSeconds(0);
     setIsFinished(false);
+    setPlayedFinishSound(false); // Resetta lo stato per il suono di fine timer quando il timer viene resettato
   }, [time]);
 
   // Effetto per controllare se il timer è terminato
 
   useEffect(() => {
-    if (initialTotalSeconds - elapsedSeconds <= 0) {
+    if (initialTotalSeconds - elapsedSeconds <= 0 && isPlay) {
       setIsFinished(true);
       setIsPlay(false);
+      if (!playedFinishSound) {
+        setPlayedFinishSound(true);
+      }
     }
-  }, [initialTotalSeconds, elapsedSeconds]);
+  }, [initialTotalSeconds, elapsedSeconds, isPlay, playedFinishSound]);
 
   // Funzione per gestire il clic del pulsante di riproduzione/pausa
   const handleButtonClick = () => {
@@ -83,6 +89,13 @@ const TimerSection = () => {
     }
     setIsPlay(!isPlay);
   };
+  // Effetto per gestire la riproduzione del suono quando richiesto dall'utente
+  useEffect(() => {
+    if (playedFinishSound) {
+      const finishTimerSound = new Audio(FinishTimer);
+      finishTimerSound.play();
+    }
+  }, [playedFinishSound]);
 
   // Funzione per gestire il clic del pulsante di riavvio
   const handleRestartClick = () => {
