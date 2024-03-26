@@ -9,12 +9,12 @@ https://breath-on.web.app/
 
 ## How it works?
 
-<img src="breath-on/src/assets/screenshots/home.png" style="width: 800px; height: 700px;" />
+<img src="breath-on/src/assets/screenshots/home.png" style="width: 700px; height: 400px;" />
 
 <em>Choose from a variety of curated templates at the top, each offering preset durations and carefully selected sounds tailored to accompany your daily activities —whether you're working, studying, or sleeping. <br/>
 Alternatively, embrace the freedom to customize your meditation experience by selecting your preferred duration and combining it with one or more soothing sounds.</em>
 
-<img src="breath-on/src/assets/screenshots/timer.png" style="width: 800px; height: 700px;" />
+<img src="breath-on/src/assets/screenshots/timer.png" style="width: 700px; height: 400px;" />
 
 ## Try it also w the darkMode!
 
