@@ -26,7 +26,6 @@ const ButtonTemplate = ({
 
     return () => {
       stopAllSounds();
-      console.log("stop");
     };
   }, [audioState]);
 

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import hero from "../assets/images/hero-img.svg";
 import heroDark from "../assets/images/hero-img-dark.svg";
 import { useTheme } from "../context/ThemeContext";
+import { TypeAnimation } from "react-type-animation";
 
 const Home = () => {
   const { darkMode } = useTheme();
@@ -26,10 +27,17 @@ const Home = () => {
 
           <Link
             to="/timer"
-            className="mt-16 flex items-center text-textColor font-petrona text-1xl lg:text-2xl sm:text-xl border rounded-xl bg-white px-6 py-2"
+            className="mt-16 flex items-center text-textColor font-petrona text-1xl lg:text-2xl sm:text-xl border rounded-xl bg-white px-6 py-2 relative overflow-hidden"
           >
-            get started
-            <FaArrowRight className="text-primary ms-7" />
+            <span className="mr-2">get</span>
+            <TypeAnimation
+              sequence={["started", 1000]}
+              wrapper="span"
+              speed={50}
+              repeat={Infinity}
+              className={"text-primary"}
+            />
+            <FaArrowRight className="text-primary ms-6" />
           </Link>
         </div>
 

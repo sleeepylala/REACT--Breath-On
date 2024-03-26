@@ -35,7 +35,6 @@ const TimerSection = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setLoaderTime((prevLoad) => {
-        console.log(prevLoad);
         if (prevLoad === 0) {
           clearInterval(timer);
           setIsLoadingComplete(true);
