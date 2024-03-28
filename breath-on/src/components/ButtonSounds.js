@@ -109,7 +109,7 @@ const ButtonSounds = () => {
           className=""
           containerClass="container-with-dots"
           dotListClass=""
-          draggable
+          draggable={false}
           focusOnSelect={false}
           infinite
           itemClass=""
